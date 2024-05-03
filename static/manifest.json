@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "FocusPocus",
+  "version": "1.0",
+
+  "permissions": ["activeTab", "storage", "alarms", "notifications"],
+
+  "action": {
+    "default_popup": "popup/index.html"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content/styles.css"]
+    }
+  ],
+
+  "options_page": "options/index.html"
+}
