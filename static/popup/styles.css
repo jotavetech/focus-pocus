@@ -59,6 +59,17 @@ header nav {
   gap: 5px;
 }
 
+header .streak {
+  display: flex;
+  align-items: end;
+}
+
+header .streak #streak-counter {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
 header button img {
   width: 25px;
   height: 25px;

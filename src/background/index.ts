@@ -11,16 +11,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         if (timer === 60 * res.selectedTime) {
           timer = 0;
           isRunning = false;
-          chrome.notifications.create(
-            "timerFinished",
-            {
-              type: "basic",
-              iconUrl: "/assets/remove.svg",
-              title: "Timer Finished",
-              message: "Your timer has finished!",
-            },
-            () => {}
-          );
+          updateStreak();
         }
 
         chrome.storage.local.set({
@@ -31,6 +22,16 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     });
   }
 });
+
+function updateStreak() {
+  chrome.storage.local.get(["streak"], (res) => {
+    if (res.streak) {
+      chrome.storage.local.set({ streak: res.streak + 1 });
+    } else {
+      chrome.storage.local.set({ streak: 1 });
+    }
+  });
+}
 
 chrome.storage.local.get(["timer", "isRunning", "selectedTime"], (res) => {
   chrome.storage.local.set({

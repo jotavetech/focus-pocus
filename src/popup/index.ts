@@ -5,6 +5,19 @@ const configButton = document.querySelector("#config") as HTMLElement;
 let selectTime = document.querySelector("#select-time") as HTMLSelectElement;
 let timer = document.querySelector("#timer-counter") as HTMLElement;
 let startButton = document.querySelector("#start") as HTMLElement;
+let streakCounter = document.querySelector("#streak-counter") as HTMLElement;
+
+chrome.storage.local.get(["streak"], (res) => {
+  if (res.streak) {
+    streakCounter.innerHTML = res.streak || 0;
+  }
+});
+
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes.streak) {
+    streakCounter.innerHTML = changes.streak.newValue;
+  }
+});
 
 function changeAppStyleMode(isRunning: boolean) {
   changePopupColor(isRunning);
@@ -38,11 +51,30 @@ function updateTimer() {
   });
 }
 
+function killStreak() {
+  chrome.storage.local.set({ streak: 0 });
+  streakCounter.innerHTML = "0";
+}
+
+function updateStreakWhenPopupIsOpen() {
+  chrome.storage.local.get(["streak"], (res) => {
+    if (res.streak) {
+      chrome.storage.local.set({ streak: res.streak + 1 });
+    } else {
+      chrome.storage.local.set({ streak: 1 });
+    }
+
+    streakCounter.innerHTML = res.streak + 1;
+  });
+}
+
 function stopTimer(isFinished: boolean) {
   if (isFinished) {
+    updateStreakWhenPopupIsOpen();
     playSound("finished");
   } else {
     playSound("giveup");
+    killStreak();
   }
 
   chrome.storage.local.set({
