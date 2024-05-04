@@ -6,7 +6,7 @@
   "permissions": ["activeTab", "storage", "alarms", "notifications"],
 
   "action": {
-    "default_popup": "popup/index.html"
+    "default_popup": "/popup/index.html"
   },
 
   "background": {
@@ -21,5 +21,5 @@
     }
   ],
 
-  "options_page": "options/index.html"
+  "options_page": "/options/index.html"
 }

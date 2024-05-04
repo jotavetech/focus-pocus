@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>FocusPocus</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>UNTILED</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
-    Hello!
+    <header>
+      <h1>FocusPocus</h1>
+      <nav>
+        <button id="config-button">
+          <img src="../assets/settings.svg" alt="settings icon" />
+        </button>
+        <button id="add-site-button">
+          <img src="../assets/plus.svg" alt="plus button" />
+        </button>
+      </nav>
+    </header>
+    <main>
+      <select id="select-time">
+        <option value="1" selected>1 MIN</option>
+        <option value="15" selected>15 MIN</option>
+        <option value="25">25 MIN</option>
+        <option value="30">30 MIN</option>
+        <option value="45">45 MIN</option>
+        <option value="60">1 HOUR</option>
+      </select>
+
+      <div class="app">
+        <p id="timer-counter">15:00</p>
+        <button id="start-button">START FOCUSING</button>
+      </div>
+    </main>
   </body>
+  <script src="../popup.js"></script>
 </html>

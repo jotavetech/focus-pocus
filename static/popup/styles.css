@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root {
+  --strong: #0d192b;
+  --semistrong: #0c5149;
+  --medium: #0a8967;
+  --normal: #09c184;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background 0.5s;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+}
+
+body {
+  border-radius: 10px;
+  width: 290px;
+  background: var(--medium);
+}
+
+header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 17px;
+  background: var(--normal);
+  border-bottom: 2px solid var(--strong);
+}
+
+header h1 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+header button img {
+  width: 25px;
+  height: 25px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+#select-time {
+  width: 220px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--semistrong);
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.status #select-time option {
+  background: var(--semistrong);
+  color: #fff;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app #timer-counter {
+  font-weight: 700;
+  font-size: 84px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.app #start-button {
+  width: 220px;
+  height: 62px;
+  background: #fff;
+  border-radius: 10px;
+  font-weight: 700;
+  color: var(--semistrong);
+  font-size: 20px;
+}
+
+.app #start-button:hover {
+  opacity: 85%;
+}
+
+.app #start-button:active {
+  transform: scale(0.95);
+}
