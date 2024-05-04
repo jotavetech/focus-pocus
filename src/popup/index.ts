@@ -53,7 +53,9 @@ function stopTimer(isFinished: boolean) {
   });
 
   changeAppStyleMode(false);
-  timer.innerHTML = `${selectTime.value}:00`;
+  timer.innerHTML = `${
+    +selectTime.value <= 9 ? "0" + selectTime.value : selectTime.value
+  }:00`;
 }
 
 function handleStartTimer() {

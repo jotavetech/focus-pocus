@@ -34,15 +34,23 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 17px;
+  padding: 0 12px;
   background: var(--normal);
   border-bottom: 2px solid var(--strong);
 }
 
 header h1 {
   color: #fff;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+header h1 img {
+  width: 45px;
+  height: 45px;
 }
 
 header nav {

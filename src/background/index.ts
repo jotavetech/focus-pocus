@@ -1,5 +1,3 @@
-import playSound from "../utils/play-popup-sounds";
-
 chrome.alarms.create("timeRunner", {
   periodInMinutes: 1 / 60,
 });
