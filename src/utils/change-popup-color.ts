@@ -1,14 +1,14 @@
 function changePopupColor(isStarted: boolean) {
   if (isStarted) {
-    document.documentElement.style.setProperty("--strong", "#003e4f");
-    document.documentElement.style.setProperty("--semistrong", "#33384e");
-    document.documentElement.style.setProperty("--medium", "#66324c");
-    document.documentElement.style.setProperty("--normal", "#992c4b");
+    document.documentElement.style.setProperty("--strong", "#020001");
+    document.documentElement.style.setProperty("--semistrong", "#340016");
+    document.documentElement.style.setProperty("--medium", "#9f102c");
+    document.documentElement.style.setProperty("--normal", "#d43b2d");
   } else {
-    document.documentElement.style.setProperty("--strong", "#0d192b");
-    document.documentElement.style.setProperty("--semistrong", "#0c5149");
-    document.documentElement.style.setProperty("--medium", "#0a8967");
-    document.documentElement.style.setProperty("--normal", "#09c184");
+    document.documentElement.style.setProperty("--strong", "#27191c");
+    document.documentElement.style.setProperty("--semistrong", "#2d3839");
+    document.documentElement.style.setProperty("--medium", "#114d4d");
+    document.documentElement.style.setProperty("--normal", "#6e9987");
   }
 }
 
