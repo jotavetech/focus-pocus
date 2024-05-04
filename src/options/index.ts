@@ -5,6 +5,9 @@ let options = document.querySelectorAll(
 let urlForm = document.querySelector("#block-list-form") as HTMLFormElement;
 let urlInput = document.querySelector("#url-input") as HTMLInputElement;
 let sendButton = document.querySelector("#send-button") as HTMLButtonElement;
+const removeAllButton = document.querySelector(
+  "#remove-all-button"
+) as HTMLButtonElement;
 
 let timerIsRunning = false;
 
@@ -121,5 +124,17 @@ document.addEventListener("click", (event) => {
     if (url) {
       removeUrlListElement(url);
     }
+  }
+});
+
+removeAllButton.addEventListener("click", () => {
+  if (timerIsRunning) {
+    alert("You can't remove a website while the focus mode is running.");
+  } else {
+    blockList = [];
+    chrome.storage.local.set({ blockList });
+
+    let ul = document.querySelector(".website-list") as HTMLUListElement;
+    ul.innerHTML = "";
   }
 });
