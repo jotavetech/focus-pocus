@@ -45,23 +45,16 @@
       <div id="blocklist">
         <p>All the websites bellow will be blocked in focus mode.</p>
         <form id="block-list-form">
-          <input type="text" placeholder="Enter a url to block" />
-          <button><img src="../assets/plus.svg" alt="plus icon" /></button>
+          <input
+            type="text"
+            placeholder="Enter a url to block"
+            id="url-input"
+          />
+          <button type="submit">
+            <img src="../assets/plus.svg" alt="plus icon" />
+          </button>
         </form>
-        <ul class="website-list">
-          <li>
-            <span>https://www.facebook.com</span>
-            <button>
-              <img src="../assets/trash-2.svg" alt="trash icon" />
-            </button>
-          </li>
-          <li>
-            <span>https://www.instagram.com</span>
-            <button>
-              <img src="../assets/trash-2.svg" alt="trash icon" />
-            </button>
-          </li>
-        </ul>
+        <ul class="website-list"></ul>
       </div>
       <footer>
         <button id="save-button">Remove all</button>
