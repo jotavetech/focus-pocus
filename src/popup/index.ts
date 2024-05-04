@@ -1,7 +1,6 @@
 import changePopupColor from "../utils/change-popup-color";
 import playSound from "../utils/play-popup-sounds";
 
-const addWebsiteButton = document.querySelector("#add-website") as HTMLElement;
 const configButton = document.querySelector("#config") as HTMLElement;
 let selectTime = document.querySelector("#select-time") as HTMLSelectElement;
 let timer = document.querySelector("#timer-counter") as HTMLElement;
@@ -85,6 +84,7 @@ function handleTimer(e: Event) {
 
 startButton.addEventListener("click", handleStartTimer);
 selectTime.addEventListener("change", handleTimer);
+configButton.onclick = () => chrome.runtime.openOptionsPage();
 
 chrome;
 
