@@ -14,6 +14,10 @@ function changeAppStyleMode(isRunning: boolean) {
 }
 
 function updateTimer() {
+  chrome.storage.local.get(["selectedTime"], (res) => {
+    selectTime.value = res.selectedTime;
+  });
+
   chrome.storage.local.get(["timer", "selectedTime", "isRunning"], (res) => {
     let minutes = `${res.selectedTime - Math.ceil(res.timer / 60)}`.padStart(
       2,
@@ -34,9 +38,6 @@ function updateTimer() {
     }
   });
 }
-
-updateTimer();
-setInterval(updateTimer, 1000);
 
 function stopTimer(isFinished: boolean) {
   if (isFinished) {
@@ -60,7 +61,6 @@ function handleStartTimer() {
 
   chrome.storage.local.get(["isRunning"], (res) => {
     if (res.isRunning) {
-      chrome.storage.local.set({ isRunning: false });
       stopTimer(false);
       return;
     }
@@ -78,8 +78,13 @@ function handleTimer(e: Event) {
   const selectElement = e.target as HTMLSelectElement;
   const minutes = parseInt(selectElement.value);
   chrome.storage.local.set({ selectedTime: minutes });
-  timer.innerHTML = `${minutes}:00`;
+  timer.innerHTML = `${minutes <= 9 ? "0" + minutes : minutes}:00`;
 }
 
 startButton.addEventListener("click", handleStartTimer);
 selectTime.addEventListener("change", handleTimer);
+
+chrome;
+
+updateTimer();
+setInterval(updateTimer, 1000);
