@@ -9,7 +9,7 @@
     "128": "assets/focus-128.png"
   },
 
-  "permissions": ["activeTab", "storage", "alarms", "notifications"],
+  "permissions": ["activeTab", "storage", "alarms", "notifications", "tabs"],
 
   "action": {
     "default_popup": "/popup/index.html"

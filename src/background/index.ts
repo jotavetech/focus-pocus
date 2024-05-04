@@ -8,6 +8,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
       if (res.isRunning) {
         let timer = res.timer + 1;
         let isRunning = true;
+
         if (timer === 60 * res.selectedTime) {
           timer = 0;
           isRunning = false;
@@ -23,13 +24,20 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   }
 });
 
-function updateStreak() {
+async function updateStreak() {
   chrome.storage.local.get(["streak"], (res) => {
     if (res.streak) {
       chrome.storage.local.set({ streak: res.streak + 1 });
     } else {
       chrome.storage.local.set({ streak: 1 });
     }
+
+    chrome.notifications.create({
+      type: "basic",
+      iconUrl: chrome.runtime.getURL("/assets/focus.png"),
+      title: "Finished a session!",
+      message: `Now you can take a break!`,
+    });
   });
 }
 
