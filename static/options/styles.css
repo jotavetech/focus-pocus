@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 :root {
-  --strong: #0d192b;
-  --semistrong: #0c5149;
-  --medium: #0a8967;
-  --normal: #09c184;
+  --strong: #001620;
+  --semistrong: #0e252f;
+  --medium: #1b333e;
+  --normal: #29424d;
 }
 
 * {
@@ -189,8 +189,8 @@ footer button {
   outline: none;
   border: none;
   cursor: pointer;
-  font-weight: 600;
-  color: #50061b;
+  font-weight: 500;
+  color: #ff4b7e;
 }
 
 footer a {
