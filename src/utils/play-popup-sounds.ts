@@ -15,14 +15,28 @@ function playGiveUpSound() {
 
 function playSound(soundType: "giveup" | "finished" | "button") {
   if (soundType === "giveup") {
-    playGiveUpSound();
+    chrome.storage.sync.get("options", (data) => {
+      if (data.options && data.options["give-up-sound"]) {
+        playGiveUpSound();
+      }
+    });
+    return;
   }
 
   if (soundType === "finished") {
-    playFinishedSound();
+    chrome.storage.sync.get("options", (data) => {
+      if (data.options && data.options["victorious-sound"]) {
+        playFinishedSound();
+      }
+    });
+    return;
   }
 
-  playButtonPressSound();
+  chrome.storage.sync.get("options", (data) => {
+    if (data.options && data.options["button-sound"]) {
+      playButtonPressSound();
+    }
+  });
 }
 
 export default playSound;
