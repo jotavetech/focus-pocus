@@ -3,6 +3,12 @@
   "name": "FocusPocus",
   "version": "1.0",
 
+  "icons": {
+    "16": "assets/focus-16.png",
+    "48": "assets/focus-48.png",
+    "128": "assets/focus-128.png"
+  },
+
   "permissions": ["activeTab", "storage", "alarms", "notifications"],
 
   "action": {
