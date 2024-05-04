@@ -15,7 +15,7 @@ function playGiveUpSound() {
 
 function playSound(soundType: "giveup" | "finished" | "button") {
   if (soundType === "giveup") {
-    chrome.storage.sync.get("options", (data) => {
+    chrome.storage.local.get("options", (data) => {
       if (data.options && data.options["give-up-sound"]) {
         playGiveUpSound();
       }
@@ -24,7 +24,7 @@ function playSound(soundType: "giveup" | "finished" | "button") {
   }
 
   if (soundType === "finished") {
-    chrome.storage.sync.get("options", (data) => {
+    chrome.storage.local.get("options", (data) => {
       if (data.options && data.options["victorious-sound"]) {
         playFinishedSound();
       }
@@ -32,7 +32,7 @@ function playSound(soundType: "giveup" | "finished" | "button") {
     return;
   }
 
-  chrome.storage.sync.get("options", (data) => {
+  chrome.storage.local.get("options", (data) => {
     if (data.options && data.options["button-sound"]) {
       playButtonPressSound();
     }
