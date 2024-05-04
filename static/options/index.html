@@ -3,7 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>FocusPocus | Settings</title>
   </head>
-  <body></body>
+  <body>
+    <main id="app">
+      <header>
+        <h1>
+          <img
+            src="../assets/focuspocus.png"
+            alt="FocusPocus silenced ring logo"
+          />
+          FocusPocus
+        </h1>
+      </header>
+      <div id="options">
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="give-up-sound" />
+            <span class="slider round"></span>
+          </label>
+
+          <p>Give up sound</p>
+        </div>
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="victorious-sound" />
+            <span class="slider round"></span>
+          </label>
+          <p>Victorious sound</p>
+        </div>
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="button-sound" />
+            <span class="slider round"></span>
+          </label>
+          <p>Start/Stop button sound</p>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div id="blocklist">
+        <p>All the websites bellow will be blocked in focus mode.</p>
+        <form id="block-list-form">
+          <input type="text" placeholder="Enter a url to block" />
+          <button><img src="../assets/plus.svg" alt="plus icon" /></button>
+        </form>
+        <ul class="website-list">
+          <li>
+            <span>https://www.facebook.com</span>
+            <button>
+              <img src="../assets/trash-2.svg" alt="trash icon" />
+            </button>
+          </li>
+          <li>
+            <span>https://www.instagram.com</span>
+            <button>
+              <img src="../assets/trash-2.svg" alt="trash icon" />
+            </button>
+          </li>
+        </ul>
+      </div>
+      <footer>
+        <button id="save-button">Remove all</button>
+        <a href="https://www.pixme.bio/jotavetech">Me apoie ❤️</a>
+      </footer>
+    </main>
+  </body>
 </html>
