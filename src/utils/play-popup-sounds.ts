@@ -1,15 +1,15 @@
 function playFinishedSound() {
-  let finishedSound = new Audio("/src/assets/finished.mp3");
+  let finishedSound = new Audio("/assets/finished.mp3");
   finishedSound.play();
 }
 
 function playButtonPressSound() {
-  let pressSound = new Audio("/src/assets/press.mp3");
+  let pressSound = new Audio("/assets/press.mp3");
   pressSound.play();
 }
 
 function playGiveUpSound() {
-  let giveUpSound = new Audio("/src/assets/lose.wav");
+  let giveUpSound = new Audio("/assets/lose.wav");
   giveUpSound.play();
 }
 

@@ -99,7 +99,7 @@ main {
   margin-bottom: 10px;
 }
 
-.app #start-button {
+.app #start {
   width: 220px;
   height: 62px;
   background: #fff;
@@ -109,10 +109,10 @@ main {
   font-size: 20px;
 }
 
-.app #start-button:hover {
+.app #start:hover {
   opacity: 85%;
 }
 
-.app #start-button:active {
+.app #start:active {
   transform: scale(0.95);
 }
