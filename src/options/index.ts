@@ -7,7 +7,7 @@ let urlInput = document.querySelector("#url-input") as HTMLInputElement;
 
 // sound options
 
-chrome.storage.sync.get("options", (data) => {
+chrome.storage.local.get("options", (data) => {
   if (data.options) {
     options.forEach((option) => {
       option.checked = data.options[option.id];
@@ -17,17 +17,19 @@ chrome.storage.sync.get("options", (data) => {
 
 options.forEach((option) => {
   option.addEventListener("change", () => {
-    chrome.storage.sync.get("options", (data) => {
+    chrome.storage.local.get("options", (data) => {
       let options = data.options || {};
       options[option.id] = option.checked;
-      chrome.storage.sync.set({ options });
+      chrome.storage.local.set({ options });
     });
   });
 });
 
+// block list
+
 let blockList: string[] = [];
 
-chrome.storage.sync.get("blockList", (data) => {
+chrome.storage.local.get("blockList", (data) => {
   blockList = data.blockList || [];
   blockList.forEach((url) => {
     addUrlListElement(url);
@@ -36,9 +38,9 @@ chrome.storage.sync.get("blockList", (data) => {
 
 urlForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  chrome.storage.sync.get("blockList", (data) => {
+  chrome.storage.local.get("blockList", (data) => {
     blockList.push(urlInput.value);
-    chrome.storage.sync.set({ blockList });
+    chrome.storage.local.set({ blockList });
     addUrlListElement(urlInput.value);
     urlInput.value = "";
   });
@@ -64,7 +66,7 @@ function addUrlListElement(url: string) {
 
 function removeUrlListElement(url: string) {
   blockList = blockList.filter((u) => u !== url);
-  chrome.storage.sync.set({ blockList });
+  chrome.storage.local.set({ blockList });
 
   let ul = document.querySelector(".website-list") as HTMLUListElement;
   ul.innerHTML = "";

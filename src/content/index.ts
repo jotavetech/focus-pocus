@@ -1,10 +1,11 @@
-let urlLinks: string[] = ["instagram.com", "twitter.com"];
+let urlLinks: string[] = [];
 
 let tabStates: Map<string, boolean> = new Map();
 
-// chrome.storage.local.get(["urlList"], (res) => {
-//   urlLinks = res.urlList || [];
-// });
+chrome.storage.local.get(["blockList"], (res) => {
+  console.log("blocklist", res.blockList);
+  urlLinks = res.blockList || [];
+});
 
 chrome.storage.local.get(["isRunning"], (res) => {
   if (res.isRunning) {
