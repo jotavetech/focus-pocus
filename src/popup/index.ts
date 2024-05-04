@@ -15,7 +15,7 @@ function changeAppStyleMode(isRunning: boolean) {
 
 function updateTimer() {
   chrome.storage.local.get(["timer", "selectedTime", "isRunning"], (res) => {
-    let minutes = `${res.timerOption - Math.ceil(res.timer / 60)}`.padStart(
+    let minutes = `${res.selectedTime - Math.ceil(res.timer / 60)}`.padStart(
       2,
       "0"
     );
@@ -25,12 +25,11 @@ function updateTimer() {
       seconds = `${60 - (res.timer % 60)}`.padStart(2, "0");
     }
 
-    if (res.isRunning) {
-      changeAppStyleMode(true);
-      timer.innerHTML = `${minutes}:${seconds}`;
-    }
+    timer.innerHTML = `${minutes}:${seconds}`;
 
-    if (+minutes <= 0 && +seconds <= 0) {
+    changeAppStyleMode(res.isRunning);
+
+    if (+minutes <= 0 && +seconds <= 1) {
       stopTimer(true);
     }
   });
@@ -53,6 +52,7 @@ function stopTimer(isFinished: boolean) {
   });
 
   changeAppStyleMode(false);
+  timer.innerHTML = `${selectTime.value}:00`;
 }
 
 function handleStartTimer() {
