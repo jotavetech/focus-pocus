@@ -34,7 +34,7 @@ async function updateStreak() {
 
     chrome.notifications.create({
       type: "basic",
-      iconUrl: chrome.runtime.getURL("/assets/focus.png"),
+      iconUrl: chrome.runtime.getURL("/assets/logo/icon-64.png"),
       title: "Finished a session!",
       message: `Now you can take a break!`,
     });
