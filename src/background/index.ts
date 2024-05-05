@@ -12,7 +12,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         if (timer === 60 * res.selectedTime) {
           timer = 0;
           isRunning = false;
-          updateStreak();
+          incrementStreak();
         }
 
         chrome.storage.local.set({
@@ -24,27 +24,41 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   }
 });
 
-async function updateStreak() {
-  chrome.storage.local.get(["streak"], (res) => {
-    if (res.streak) {
-      chrome.storage.local.set({ streak: res.streak + 1 });
-    } else {
-      chrome.storage.local.set({ streak: 1 });
-    }
+function getStreakFromStorage() {
+  let streak = 0;
 
-    chrome.notifications.create({
-      type: "basic",
-      iconUrl: chrome.runtime.getURL("/assets/logo/icon-64.png"),
-      title: "Finished a session!",
-      message: `Now you can take a break!`,
-    });
+  chrome.storage.local.get(["streak"], (res) => {
+    if (res.streak) streak = res.streak;
+  });
+
+  return streak;
+}
+
+function pushFinishedSessionNotification() {
+  chrome.notifications.create({
+    type: "basic",
+    iconUrl: chrome.runtime.getURL("/assets/logo/icon-64.png"),
+    title: "Finished a session!",
+    message: `Now you can take a break!`,
   });
 }
 
-chrome.storage.local.get(["timer", "isRunning", "selectedTime"], (res) => {
+function incrementStreak() {
+  let streak = getStreakFromStorage();
+  chrome.storage.local.set({ streak: streak + 1 });
+  pushFinishedSessionNotification();
+}
+
+function resetStreak() {
+  chrome.storage.local.set({ streak: 0 });
+}
+
+chrome.storage.local.get(["timer", "isRunning", "selectedTime", ""], (res) => {
   chrome.storage.local.set({
     timer: "timer" in res ? res.timer : 0,
     selectedTime: "selectedTime" in res ? res.selectedTime : 25,
     isRunning: "isRunning" in res ? res.isRunning : false,
   });
 });
+
+export { getStreakFromStorage, incrementStreak, resetStreak };
