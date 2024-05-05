@@ -3,6 +3,7 @@
   "name": "FocusPocus: In Magical Focus",
   "description": "Stay focused as if under a magical spell.",
   "version": "1.0",
+  "author": "@jotavetech",
 
   "icons": {
     "16": "assets/logo/icon-32.png",
