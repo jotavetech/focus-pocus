@@ -118,7 +118,5 @@ startButton.addEventListener("click", handleStartTimer);
 selectTime.addEventListener("change", handleTimer);
 configButton.onclick = () => chrome.runtime.openOptionsPage();
 
-chrome;
-
 updateTimer();
 setInterval(updateTimer, 1000);

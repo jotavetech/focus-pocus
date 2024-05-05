@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "FocusPocus: Focus on the important stuff",
-  "description": "FocusPocus helps you focus on the important stuff by blocking distracting websites.",
+  "description": "Stay focused on the important stuff by blocking distracting websites.",
   "version": "1.0",
 
   "icons": {

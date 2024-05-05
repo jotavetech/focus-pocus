@@ -2,11 +2,9 @@ let urlLinks: string[] = [];
 
 let tabStates: Map<string, boolean> = new Map();
 
-chrome.storage.local.get(["blockList"], (res) => {
+chrome.storage.local.get(["blockList", "isRunning"], (res) => {
   urlLinks = res.blockList || [];
-});
 
-chrome.storage.local.get(["isRunning"], (res) => {
   if (res.isRunning) {
     addFocusPage();
   }
@@ -16,9 +14,7 @@ chrome.storage.onChanged.addListener((changes) => {
   if (changes.blockList) {
     urlLinks = changes.blockList.newValue;
   }
-});
 
-chrome.storage.onChanged.addListener((changes) => {
   if (changes.isRunning && changes.isRunning.newValue) {
     addFocusPage();
   }
