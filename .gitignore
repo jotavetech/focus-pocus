@@ -2,3 +2,6 @@ node_modules
 yarn.lock
 package-lock.json
 dist
+focus-pocus.zip
+dist.crx
+dist.pem

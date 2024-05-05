@@ -42,7 +42,7 @@ header {
 header h1 {
   color: #fff;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 400;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -134,8 +134,8 @@ main {
   width: 220px;
   height: 62px;
   background: #fff;
-  border-radius: 10px;
-  font-weight: 700;
+  border-radius: 25px;
+  font-weight: 600;
   color: var(--semistrong);
   font-size: 20px;
 }

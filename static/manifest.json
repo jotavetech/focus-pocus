@@ -1,12 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "FocusPocus",
+  "name": "FocusPocus: Focus on the important stuff",
+  "description": "FocusPocus helps you focus on the important stuff by blocking distracting websites.",
   "version": "1.0",
 
   "icons": {
-    "16": "assets/focus-16.png",
-    "48": "assets/focus-48.png",
-    "128": "assets/focus-128.png"
+    "16": "assets/logo/icon-32.png",
+    "32": "assets/logo/icon-32.png",
+    "64": "assets/logo/icon-64.png",
+    "128": "assets/logo/icon-128.png"
   },
 
   "permissions": ["activeTab", "storage", "alarms", "notifications", "tabs"],

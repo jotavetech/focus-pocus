@@ -85,7 +85,7 @@ function createUrlListElement(url: string) {
   li.innerHTML = `
     <span>${url}</span>
     <button class="remove-button">
-      <img src="../assets/trash-2.svg" alt="trash icon" />
+      <img src="../assets/img/trash-2.svg" alt="trash icon" />
     </button>
   `;
 
