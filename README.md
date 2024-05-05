@@ -8,6 +8,8 @@
 
 > FocusPocus is an chrome extension created to help you maintain focus on your studies by blocking access to pages that may distract you during focus mode.
 
+![FocusPocus icon (a clock) with the text 'FocusPocus' and below a slogan 'Stay focused as if under a magical spell](https://i.imgur.com/pn5aZcT.png)
+
 ### Features
 
 1. Focus Mode: Activate focus mode to block access to distracting websites while studying.
@@ -23,7 +25,8 @@
 - [ ] Add custom timer settings.
 - [ ] Add groups for blocked websites list.
 - [ ] Add verification if you really want to give up.
-- [ ] Add support for other browsers
+- [ ] Add support for other browsers.
+- [ ] Add PT-BR language support.
 
 ### How to run locally
 
@@ -41,3 +44,12 @@ cd focus-pocus
 yarn #install the dependencies
 yarn dev #run and compile to /dest folder
 ```
+
+### How to contribute
+
+1. Fork this repository.
+2. Clone your fork on your machine.
+3. Make your changes, commit and push these.
+4. Open a pull request (Write a descriptive message about what you changed).
+
+Thank you ❤️

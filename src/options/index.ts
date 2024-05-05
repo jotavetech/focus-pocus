@@ -22,7 +22,6 @@ chrome.storage.local.get("isRunning", (data) => {
 });
 
 chrome.storage.onChanged.addListener((changes) => {
-  console.log(changes);
   if (changes.isRunning && changes.isRunning.newValue) {
     urlInput.disabled = true;
     sendButton.disabled = true;
