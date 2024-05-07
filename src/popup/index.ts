@@ -2,10 +2,10 @@ import changePopupColor from "../utils/change-popup-color";
 import playSound from "../utils/play-popup-sounds";
 
 const configButton = document.querySelector("#config") as HTMLElement;
-let selectTime = document.querySelector("#select-time") as HTMLSelectElement;
-let timer = document.querySelector("#timer-counter") as HTMLElement;
-let startButton = document.querySelector("#start") as HTMLElement;
-let streakCounter = document.querySelector("#streak-counter") as HTMLElement;
+const selectTime = document.querySelector("#select-time") as HTMLSelectElement;
+const timer = document.querySelector("#timer-counter") as HTMLElement;
+const startButton = document.querySelector("#start") as HTMLElement;
+const streakCounter = document.querySelector("#streak-counter") as HTMLElement;
 
 chrome.storage.local.get(["streak"], (res) => {
   if (res.streak) {
@@ -116,7 +116,7 @@ function handleTimer(e: Event) {
 
 startButton.addEventListener("click", handleStartTimer);
 selectTime.addEventListener("change", handleTimer);
-configButton.onclick = () => chrome.runtime.openOptionsPage();
+configButton.addEventListener("click", () => chrome.runtime.openOptionsPage());
 
 updateTimer();
 setInterval(updateTimer, 1000);
