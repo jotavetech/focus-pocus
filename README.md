@@ -1,5 +1,7 @@
 # FocusPocus
 
+[Vídeo Demo](https://www.youtube.com/watch?v=4UI_6rQ95HU)
+
 <div>
     <img src="https://img.shields.io/github/languages/top/jotavetech/focus-pocus" alt="Most used language" />
     <img src="https://img.shields.io/github/last-commit/jotavetech/focus-pocus" alt="Last commit" />
@@ -23,6 +25,7 @@
 ### Todo
 
 - [ ] Add custom timer settings.
+- [ ] Add allowed list mode.
 - [ ] Add groups for blocked websites list.
 - [ ] Add verification if you really want to give up.
 - [ ] Add support for other browsers.
