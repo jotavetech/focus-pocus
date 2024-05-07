@@ -9,6 +9,8 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         let timer = res.timer + 1;
         let isRunning = true;
 
+        console.log("safa2");
+
         if (timer === 60 * res.selectedTime) {
           timer = 0;
           isRunning = false;
@@ -34,15 +36,11 @@ function pushFinishedSessionNotification() {
 }
 
 async function getStreakAndIncrement() {
-  return new Promise((resolve, reject) => {
-    chrome.storage.local.get(["streak"], (res) => {
-      const streak = res.streak || 0;
-
-      chrome.storage.local.set({ streak: streak + 1 }, () => {
-        resolve(streak + 1);
-      });
-    });
-  }).then(() => pushFinishedSessionNotification());
+  chrome.storage.local.get(["streak"]).then((res) => {
+    const streak = res.streak || 0;
+    chrome.storage.local.set({ streak: streak + 1 });
+    pushFinishedSessionNotification();
+  });
 }
 
 function resetStreak() {
