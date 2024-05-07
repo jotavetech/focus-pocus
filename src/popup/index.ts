@@ -48,7 +48,7 @@ chrome.storage.onChanged.addListener((changes) => {
   if (changes.streak && changes.streak.oldValue < changes.streak.newValue) {
     playSound("finished");
   }
-  if (changes.timer.oldValue != changes.timer.newValue) {
+  if (changes.timer && changes.timer.oldValue != changes.timer.newValue) {
     updateTimer();
   }
 });
