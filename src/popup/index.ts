@@ -1,3 +1,8 @@
+import {
+  changeSelectedTime,
+  handleStartTimer,
+} from "../background/services/timer";
+
 import changePopupColor from "../utils/change-popup-color";
 import playSound from "../utils/play-popup-sounds";
 
@@ -89,33 +94,21 @@ function stopTimer(isFinished: boolean) {
   }:00`;
 }
 
-function handleStartTimer() {
+function handleStartTimerButton() {
   playSound("button");
-
-  chrome.storage.local.get(["isRunning"], (res) => {
-    if (res.isRunning) {
-      stopTimer(false);
-      return;
-    }
-
-    chrome.storage.local.set(
-      {
-        isRunning: true,
-      },
-      () => changeAppStyleMode(true)
-    );
-  });
+  handleStartTimer();
 }
 
-function handleTimer(e: Event) {
+function handleTimerSelect(e: Event) {
   const selectElement = e.target as HTMLSelectElement;
   const minutes = parseInt(selectElement.value);
-  chrome.storage.local.set({ selectedTime: minutes });
+  changeSelectedTime(minutes);
+
   timer.innerHTML = `${minutes <= 9 ? "0" + minutes : minutes}:00`;
 }
 
-startButton.addEventListener("click", handleStartTimer);
-selectTime.addEventListener("change", handleTimer);
+startButton.addEventListener("click", handleStartTimerButton);
+selectTime.addEventListener("change", handleTimerSelect);
 configButton.addEventListener("click", () => chrome.runtime.openOptionsPage());
 
 updateTimer();

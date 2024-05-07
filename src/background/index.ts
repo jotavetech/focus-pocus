@@ -1,3 +1,5 @@
+import { getStreakAndIncrement } from "./services/streak";
+
 chrome.alarms.create("timeRunner", {
   periodInMinutes: 1 / 60,
 });
@@ -9,7 +11,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         let timer = res.timer + 1;
         let isRunning = true;
 
-        console.log("safa2");
+        console.log("safa3");
 
         if (timer === 60 * res.selectedTime) {
           timer = 0;
@@ -26,28 +28,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   }
 });
 
-function pushFinishedSessionNotification() {
-  chrome.notifications.create({
-    type: "basic",
-    iconUrl: chrome.runtime.getURL("/assets/logo/icon-64.png"),
-    title: "Finished a session!",
-    message: `Now you can take a break!`,
-  });
-}
-
-async function getStreakAndIncrement() {
-  chrome.storage.local.get(["streak"]).then((res) => {
-    const streak = res.streak || 0;
-    chrome.storage.local.set({ streak: streak + 1 });
-    pushFinishedSessionNotification();
-  });
-}
-
-function resetStreak() {
-  chrome.storage.local.set({ streak: 0 });
-}
-
-chrome.storage.local.get(["timer", "isRunning", "selectedTime", ""], (res) => {
+chrome.storage.local.get(["timer", "isRunning", "selectedTime"], (res) => {
   chrome.storage.local.set({
     timer: "timer" in res ? res.timer : 0,
     selectedTime: "selectedTime" in res ? res.selectedTime : 25,
