@@ -45,6 +45,16 @@ yarn #install the dependencies
 yarn dev #run and compile to /dest folder
 ```
 
+_with npm:_
+
+```bash
+git clone https://github.com/jotavetech/focus-pocus.git
+cd focus-pocus
+
+npm install #install the dependencies
+npm run dev #run and compile to /dest folder
+```
+
 ### How to contribute
 
 1. Fork this repository.
