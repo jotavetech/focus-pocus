@@ -18,12 +18,6 @@ function changeAppStyleMode(isRunning: boolean) {
   selectTime.disabled = isRunning;
 }
 
-chrome.storage.onChanged.addListener((changes) => {
-  if (changes.streak && changes.streak.oldValue < changes.streak.newValue) {
-    playSound("finished");
-  }
-});
-
 function updateTimer() {
   chrome.storage.local.get(
     ["timer", "selectedTime", "isRunning", "streak"],
@@ -48,6 +42,17 @@ function updateTimer() {
   );
 }
 
+updateTimer();
+
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes.streak && changes.streak.oldValue < changes.streak.newValue) {
+    playSound("finished");
+  }
+  if (changes.timer.oldValue != changes.timer.newValue) {
+    updateTimer();
+  }
+});
+
 function handleStartTimerButton() {
   playSound("button");
   handleStartTimer();
@@ -64,6 +69,3 @@ function handleTimerSelect(e: Event) {
 startButton.addEventListener("click", handleStartTimerButton);
 selectTime.addEventListener("change", handleTimerSelect);
 configButton.addEventListener("click", () => chrome.runtime.openOptionsPage());
-
-updateTimer();
-setInterval(updateTimer, 1000);
