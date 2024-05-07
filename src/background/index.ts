@@ -12,7 +12,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         if (timer === 60 * res.selectedTime) {
           timer = 0;
           isRunning = false;
-          incrementStreak();
+          getStreakAndIncrement();
         }
 
         chrome.storage.local.set({
@@ -24,16 +24,6 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   }
 });
 
-function getStreakFromStorage() {
-  let streak = 0;
-
-  chrome.storage.local.get(["streak"], (res) => {
-    if (res.streak) streak = res.streak;
-  });
-
-  return streak;
-}
-
 function pushFinishedSessionNotification() {
   chrome.notifications.create({
     type: "basic",
@@ -43,10 +33,16 @@ function pushFinishedSessionNotification() {
   });
 }
 
-function incrementStreak() {
-  let streak = getStreakFromStorage();
-  chrome.storage.local.set({ streak: streak + 1 });
-  pushFinishedSessionNotification();
+async function getStreakAndIncrement() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(["streak"], (res) => {
+      const streak = res.streak || 0;
+
+      chrome.storage.local.set({ streak: streak + 1 }, () => {
+        resolve(streak + 1);
+      });
+    });
+  }).then(() => pushFinishedSessionNotification());
 }
 
 function resetStreak() {
@@ -60,5 +56,3 @@ chrome.storage.local.get(["timer", "isRunning", "selectedTime", ""], (res) => {
     isRunning: "isRunning" in res ? res.isRunning : false,
   });
 });
-
-export { getStreakFromStorage, incrementStreak, resetStreak };
