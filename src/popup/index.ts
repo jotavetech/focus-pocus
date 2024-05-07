@@ -18,6 +18,12 @@ function changeAppStyleMode(isRunning: boolean) {
   selectTime.disabled = isRunning;
 }
 
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes.streak && changes.streak.oldValue < changes.streak.newValue) {
+    playSound("finished");
+  }
+});
+
 function updateTimer() {
   chrome.storage.local.get(
     ["timer", "selectedTime", "isRunning", "streak"],

@@ -1,3 +1,5 @@
+import playSound from "../../utils/play-popup-sounds";
+
 import { resetStreak } from "./streak";
 
 function stopTimer() {
@@ -12,6 +14,7 @@ function handleStartTimer() {
     if (res.isRunning) {
       stopTimer();
       resetStreak();
+      playSound("giveup");
       return;
     }
 

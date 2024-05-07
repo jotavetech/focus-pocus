@@ -11,8 +11,6 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         let timer = res.timer + 1;
         let isRunning = true;
 
-        console.log("safa3");
-
         if (timer === 60 * res.selectedTime) {
           timer = 0;
           isRunning = false;
