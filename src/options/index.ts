@@ -1,25 +1,39 @@
 import browser from 'webextension-polyfill';
 
-let options = document.querySelectorAll(
+const options = document.querySelectorAll(
   'input[type="checkbox"]'
 ) as NodeListOf<HTMLInputElement>;
 
-let urlForm = document.querySelector("#block-list-form") as HTMLFormElement;
-let urlInput = document.querySelector("#url-input") as HTMLInputElement;
-let sendButton = document.querySelector("#send-button") as HTMLButtonElement;
+const urlForm = document.querySelector("#block-list-form") as HTMLFormElement;
+const urlInput = document.querySelector("#url-input") as HTMLInputElement;
+const sendButton = document.querySelector("#send-button") as HTMLButtonElement;
 const removeAllButton = document.querySelector(
   "#remove-all-button"
 ) as HTMLButtonElement;
 
 let timerIsRunning = false;
+let blockList: string[] = [];
 
 // sound options
 
-browser.storage.local.get("isRunning").then((data) => {
+browser.storage.local.get(["isRunning", "options", "blockList"]).then((data) => {
   if (data.isRunning) {
     urlInput.disabled = true;
     sendButton.disabled = true;
     timerIsRunning = true;
+  }
+
+  if (data.options) {
+    options.forEach((option) => {
+      option.checked = data.options[option.id];
+    });
+  }
+
+  if (data.blockList) {
+    blockList = data.blockList;
+    blockList.forEach((url) => {
+      addUrlListElement(url);
+    });
   }
 });
 
@@ -37,14 +51,6 @@ browser.storage.onChanged.addListener((changes) => {
   }
 });
 
-browser.storage.local.get("options").then((data) => {
-  if (data.options) {
-    options.forEach((option) => {
-      option.checked = data.options[option.id];
-    });
-  }
-});
-
 options.forEach((option) => {
   option.addEventListener("change", () => {
     browser.storage.local.get("options").then((data) => {
@@ -55,29 +61,16 @@ options.forEach((option) => {
   });
 });
 
-// block list
-
-let blockList: string[] = [];
-
-browser.storage.local.get("blockList").then((data) => {
-  blockList = data.blockList || [];
-  blockList.forEach((url) => {
-    addUrlListElement(url);
-  });
-});
-
 urlForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (!urlInput.value) {
-    alert("Please enter a URL.");
-    return;
-  }
-  browser.storage.local.get("blockList").then((data) => {
-    blockList.push(urlInput.value);
-    browser.storage.local.set({ blockList });
-    addUrlListElement(urlInput.value);
-    urlInput.value = "";
-  });
+  if (timerIsRunning)
+    return alert("You can't add a website while the focus mode is running.");
+  if (!urlInput.value) return alert("Please enter a URL.");
+
+  blockList.push(urlInput.value);
+  browser.storage.local.set({ blockList });
+  addUrlListElement(urlInput.value);
+  urlInput.value = "";
 });
 
 function createUrlListElement(url: string) {
@@ -99,19 +92,18 @@ function addUrlListElement(url: string) {
 }
 
 function removeUrlListElement(url: string) {
-  if (timerIsRunning) {
-    alert("You can't remove a website while the focus mode is running.");
-  } else {
-    blockList = blockList.filter((u) => u !== url);
-    browser.storage.local.set({ blockList });
+  if (timerIsRunning)
+    return alert("You can't remove a website while the focus mode is running.");
 
-    let ul = document.querySelector(".website-list") as HTMLUListElement;
-    ul.innerHTML = "";
+  blockList = blockList.filter((u) => u !== url);
+  browser.storage.local.set({ blockList });
 
-    blockList.forEach((url) => {
-      addUrlListElement(url);
-    });
-  }
+  let ul = document.querySelector(".website-list") as HTMLUListElement;
+  ul.innerHTML = "";
+
+  blockList.forEach((url) => {
+    addUrlListElement(url);
+  });
 }
 
 document.addEventListener("click", (event) => {
@@ -129,13 +121,12 @@ document.addEventListener("click", (event) => {
 });
 
 removeAllButton.addEventListener("click", () => {
-  if (timerIsRunning) {
-    alert("You can't remove a website while the focus mode is running.");
-  } else {
-    blockList = [];
-    browser.storage.local.set({ blockList });
+  if (timerIsRunning)
+    return alert("You can't remove a website while the focus mode is running.");
 
-    let ul = document.querySelector(".website-list") as HTMLUListElement;
-    ul.innerHTML = "";
-  }
+  blockList = [];
+  browser.storage.local.set({ blockList });
+
+  let ul = document.querySelector(".website-list") as HTMLUListElement;
+  ul.innerHTML = "";
 });
