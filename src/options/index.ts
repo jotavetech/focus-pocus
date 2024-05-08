@@ -10,14 +10,28 @@ const removeAllButton = document.querySelector(
 ) as HTMLButtonElement;
 
 let timerIsRunning = false;
+let blockList: string[] = [];
 
 // sound options
 
-chrome.storage.local.get("isRunning", (data) => {
+chrome.storage.local.get(["isRunning", "options", "blockList"], (data) => {
   if (data.isRunning) {
     urlInput.disabled = true;
     sendButton.disabled = true;
     timerIsRunning = true;
+  }
+
+  if (data.options) {
+    options.forEach((option) => {
+      option.checked = data.options[option.id];
+    });
+  }
+
+  if (data.blockList) {
+    blockList = data.blockList;
+    blockList.forEach((url) => {
+      addUrlListElement(url);
+    });
   }
 });
 
@@ -26,22 +40,12 @@ chrome.storage.onChanged.addListener((changes) => {
     urlInput.disabled = true;
     sendButton.disabled = true;
     timerIsRunning = true;
-
-    return;
   }
 
   if (changes.isRunning && !changes.isRunning.newValue) {
     urlInput.disabled = false;
     sendButton.disabled = false;
     timerIsRunning = false;
-  }
-});
-
-chrome.storage.local.get("options", (data) => {
-  if (data.options) {
-    options.forEach((option) => {
-      option.checked = data.options[option.id];
-    });
   }
 });
 
@@ -55,29 +59,16 @@ options.forEach((option) => {
   });
 });
 
-// block list
-
-let blockList: string[] = [];
-
-chrome.storage.local.get("blockList", (data) => {
-  blockList = data.blockList || [];
-  blockList.forEach((url) => {
-    addUrlListElement(url);
-  });
-});
-
 urlForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (!urlInput.value) {
-    alert("Please enter a URL.");
-    return;
-  }
-  chrome.storage.local.get("blockList", (data) => {
-    blockList.push(urlInput.value);
-    chrome.storage.local.set({ blockList });
-    addUrlListElement(urlInput.value);
-    urlInput.value = "";
-  });
+  if (timerIsRunning)
+    return alert("You can't add a website while the focus mode is running.");
+  if (!urlInput.value) return alert("Please enter a URL.");
+
+  blockList.push(urlInput.value);
+  chrome.storage.local.set({ blockList });
+  addUrlListElement(urlInput.value);
+  urlInput.value = "";
 });
 
 function createUrlListElement(url: string) {
@@ -99,19 +90,18 @@ function addUrlListElement(url: string) {
 }
 
 function removeUrlListElement(url: string) {
-  if (timerIsRunning) {
-    alert("You can't remove a website while the focus mode is running.");
-  } else {
-    blockList = blockList.filter((u) => u !== url);
-    chrome.storage.local.set({ blockList });
+  if (timerIsRunning)
+    return alert("You can't remove a website while the focus mode is running.");
 
-    let ul = document.querySelector(".website-list") as HTMLUListElement;
-    ul.innerHTML = "";
+  blockList = blockList.filter((u) => u !== url);
+  chrome.storage.local.set({ blockList });
 
-    blockList.forEach((url) => {
-      addUrlListElement(url);
-    });
-  }
+  let ul = document.querySelector(".website-list") as HTMLUListElement;
+  ul.innerHTML = "";
+
+  blockList.forEach((url) => {
+    addUrlListElement(url);
+  });
 }
 
 document.addEventListener("click", (event) => {
@@ -129,13 +119,12 @@ document.addEventListener("click", (event) => {
 });
 
 removeAllButton.addEventListener("click", () => {
-  if (timerIsRunning) {
-    alert("You can't remove a website while the focus mode is running.");
-  } else {
-    blockList = [];
-    chrome.storage.local.set({ blockList });
+  if (timerIsRunning)
+    return alert("You can't remove a website while the focus mode is running.");
 
-    let ul = document.querySelector(".website-list") as HTMLUListElement;
-    ul.innerHTML = "";
-  }
+  blockList = [];
+  chrome.storage.local.set({ blockList });
+
+  let ul = document.querySelector(".website-list") as HTMLUListElement;
+  ul.innerHTML = "";
 });
