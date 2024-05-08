@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill';
+
 let options = document.querySelectorAll(
   'input[type="checkbox"]'
 ) as NodeListOf<HTMLInputElement>;
@@ -13,7 +15,7 @@ let timerIsRunning = false;
 
 // sound options
 
-chrome.storage.local.get("isRunning", (data) => {
+browser.storage.local.get("isRunning").then((data) => {
   if (data.isRunning) {
     urlInput.disabled = true;
     sendButton.disabled = true;
@@ -21,7 +23,7 @@ chrome.storage.local.get("isRunning", (data) => {
   }
 });
 
-chrome.storage.onChanged.addListener((changes) => {
+browser.storage.onChanged.addListener((changes) => {
   if (changes.isRunning && changes.isRunning.newValue) {
     urlInput.disabled = true;
     sendButton.disabled = true;
@@ -35,7 +37,7 @@ chrome.storage.onChanged.addListener((changes) => {
   }
 });
 
-chrome.storage.local.get("options", (data) => {
+browser.storage.local.get("options").then((data) => {
   if (data.options) {
     options.forEach((option) => {
       option.checked = data.options[option.id];
@@ -45,10 +47,10 @@ chrome.storage.local.get("options", (data) => {
 
 options.forEach((option) => {
   option.addEventListener("change", () => {
-    chrome.storage.local.get("options", (data) => {
+    browser.storage.local.get("options").then((data) => {
       let options = data.options || {};
       options[option.id] = option.checked;
-      chrome.storage.local.set({ options });
+      browser.storage.local.set({ options });
     });
   });
 });
@@ -57,7 +59,7 @@ options.forEach((option) => {
 
 let blockList: string[] = [];
 
-chrome.storage.local.get("blockList", (data) => {
+browser.storage.local.get("blockList").then((data) => {
   blockList = data.blockList || [];
   blockList.forEach((url) => {
     addUrlListElement(url);
@@ -70,9 +72,9 @@ urlForm.addEventListener("submit", (e) => {
     alert("Please enter a URL.");
     return;
   }
-  chrome.storage.local.get("blockList", (data) => {
+  browser.storage.local.get("blockList").then((data) => {
     blockList.push(urlInput.value);
-    chrome.storage.local.set({ blockList });
+    browser.storage.local.set({ blockList });
     addUrlListElement(urlInput.value);
     urlInput.value = "";
   });
@@ -101,7 +103,7 @@ function removeUrlListElement(url: string) {
     alert("You can't remove a website while the focus mode is running.");
   } else {
     blockList = blockList.filter((u) => u !== url);
-    chrome.storage.local.set({ blockList });
+    browser.storage.local.set({ blockList });
 
     let ul = document.querySelector(".website-list") as HTMLUListElement;
     ul.innerHTML = "";
@@ -131,7 +133,7 @@ removeAllButton.addEventListener("click", () => {
     alert("You can't remove a website while the focus mode is running.");
   } else {
     blockList = [];
-    chrome.storage.local.set({ blockList });
+    browser.storage.local.set({ blockList });
 
     let ul = document.querySelector(".website-list") as HTMLUListElement;
     ul.innerHTML = "";
