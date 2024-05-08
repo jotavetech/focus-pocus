@@ -1,5 +1,8 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
+
+const browser = process.env.BROWSER_TARGET || 'chrome';
 
 module.exports = {
   devtool: "source-map",
@@ -23,12 +26,18 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, `dist/${browser}`),
   },
   watch: true,
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.BROWSER_TARGET': JSON.stringify(browser)
+    }),
     new CopyWebpackPlugin({
-      patterns: [{ from: "static" }],
+      patterns: [
+        { from: `./manifest.${browser}.json`, to: 'manifest.json' },
+        { from: "static" }
+      ],
     }),
   ],
 };

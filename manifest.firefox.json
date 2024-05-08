@@ -1,0 +1,50 @@
+{
+  "manifest_version": 2,
+  "name": "FocusPocus: In Magical Focus",
+  "description": "Stay focused as if under a magical spell.",
+  "version": "1.0",
+  "author": "@ryrden",
+
+  "icons": {
+    "48": "/assets/logo/icon-64.png",
+    "96": "/assets/logo/icon-128.png"
+  },
+
+  "permissions": ["storage", "alarms", "notifications"],
+
+  "browser_action": {
+    "default_icon": {
+      "48": "/assets/logo/icon-64.png",
+      "96": "/assets/logo/icon-128.png"
+    },
+    "default_popup": "/popup/index.html",
+    "default_title": "FocusPocus"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["/content/styles.css"]
+    }
+  ],
+
+  "options_ui": {
+    "page": "/options/index.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+
+  "web_accessible_resources": [
+    "/assets/logo/*",
+    "/popup/*",
+    "/options/*",
+    "/content/*"
+  ]
+}
