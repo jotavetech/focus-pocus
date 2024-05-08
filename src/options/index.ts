@@ -1,10 +1,10 @@
-let options = document.querySelectorAll(
+const options = document.querySelectorAll(
   'input[type="checkbox"]'
 ) as NodeListOf<HTMLInputElement>;
 
-let urlForm = document.querySelector("#block-list-form") as HTMLFormElement;
-let urlInput = document.querySelector("#url-input") as HTMLInputElement;
-let sendButton = document.querySelector("#send-button") as HTMLButtonElement;
+const urlForm = document.querySelector("#block-list-form") as HTMLFormElement;
+const urlInput = document.querySelector("#url-input") as HTMLInputElement;
+const sendButton = document.querySelector("#send-button") as HTMLButtonElement;
 const removeAllButton = document.querySelector(
   "#remove-all-button"
 ) as HTMLButtonElement;
@@ -26,6 +26,8 @@ chrome.storage.onChanged.addListener((changes) => {
     urlInput.disabled = true;
     sendButton.disabled = true;
     timerIsRunning = true;
+
+    return;
   }
 
   if (changes.isRunning && !changes.isRunning.newValue) {
