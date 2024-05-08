@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "dev:chrome": "cross-env BROWSER_TARGET=chrome webpack --mode development",
+    "dev:firefox": "cross-env BROWSER_TARGET=firefox webpack --mode development",
+    "build:chrome": "cross-env BROWSER_TARGET=chrome webpack --mode production",
+    "build:firefox": "cross-env BROWSER_TARGET=firefox webpack --mode production"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
   "devDependencies": {
     "@types/chrome": "^0.0.267",
     "copy-webpack-plugin": "^12.0.2",
+    "cross-env": "^7.0.3",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
