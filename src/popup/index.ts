@@ -2,6 +2,7 @@ import {
   changeSelectedTime,
   handleStartTimer,
 } from "../background/services/timer";
+import browser from 'webextension-polyfill';
 
 import changePopupColor from "../utils/change-popup-color";
 import playSound from "../utils/play-popup-sounds";
@@ -19,9 +20,9 @@ function changeAppStyleMode(isRunning: boolean) {
 }
 
 function updateTimer() {
-  chrome.storage.local.get(
-    ["timer", "selectedTime", "isRunning", "streak"],
-    (res) => {
+  browser.storage.local.get(
+    ["timer", "selectedTime", "isRunning", "streak"])
+    .then((res) => {
       selectTime.value = res.selectedTime || 25;
       streakCounter.innerHTML = res.streak || 0;
 
@@ -44,7 +45,7 @@ function updateTimer() {
 
 updateTimer();
 
-chrome.storage.onChanged.addListener((changes) => {
+browser.storage.onChanged.addListener((changes) => {
   if (changes.streak && changes.streak.oldValue < changes.streak.newValue) {
     playSound("finished");
   }
@@ -68,4 +69,4 @@ function handleTimerSelect(e: Event) {
 
 startButton.addEventListener("click", handleStartTimerButton);
 selectTime.addEventListener("change", handleTimerSelect);
-configButton.addEventListener("click", () => chrome.runtime.openOptionsPage());
+configButton.addEventListener("click", () => browser.runtime.openOptionsPage());

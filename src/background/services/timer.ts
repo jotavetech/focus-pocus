@@ -1,16 +1,18 @@
+import browser from 'webextension-polyfill';
+
 import playSound from "../../utils/play-popup-sounds";
 
 import { resetStreak } from "./streak";
 
 function stopTimer() {
-  chrome.storage.local.set({
+  browser.storage.local.set({
     isRunning: false,
     timer: 0,
   });
 }
 
 function handleStartTimer() {
-  chrome.storage.local.get(["isRunning"]).then((res) => {
+  browser.storage.local.get(["isRunning"]).then((res) => {
     if (res.isRunning) {
       stopTimer();
       resetStreak();
@@ -18,14 +20,14 @@ function handleStartTimer() {
       return;
     }
 
-    chrome.storage.local.set({
+    browser.storage.local.set({
       isRunning: true,
     });
   });
 }
 
 function changeSelectedTime(time: number) {
-  chrome.storage.local.set({
+  browser.storage.local.set({
     selectedTime: time,
   });
 }

@@ -1,12 +1,13 @@
 import { getStreakAndIncrement } from "./services/streak";
+import browser from 'webextension-polyfill';
 
-chrome.alarms.create("timeRunner", {
+browser.alarms.create("timeRunner", {
   periodInMinutes: 1 / 60,
 });
 
-chrome.alarms.onAlarm.addListener((alarm) => {
+browser.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "timeRunner") {
-    chrome.storage.local.get(["timer", "isRunning", "selectedTime"], (res) => {
+    browser.storage.local.get(["timer", "isRunning", "selectedTime"]).then((res) => {
       if (res.isRunning) {
         let timer = res.timer + 1;
         let isRunning = true;
@@ -17,7 +18,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
           getStreakAndIncrement();
         }
 
-        chrome.storage.local.set({
+        browser.storage.local.set({
           timer,
           isRunning,
         });
@@ -26,8 +27,8 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   }
 });
 
-chrome.storage.local.get(["timer", "isRunning", "selectedTime"], (res) => {
-  chrome.storage.local.set({
+browser.storage.local.get(["timer", "isRunning", "selectedTime"]).then((res) => {
+  browser.storage.local.set({
     timer: "timer" in res ? res.timer : 0,
     selectedTime: "selectedTime" in res ? res.selectedTime : 25,
     isRunning: "isRunning" in res ? res.isRunning : false,

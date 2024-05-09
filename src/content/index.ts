@@ -1,8 +1,10 @@
+import browser from 'webextension-polyfill';
+
 let urlLinks: string[] = [];
 
 let tabStates: Map<string, boolean> = new Map();
 
-chrome.storage.local.get(["blockList", "isRunning"], (res) => {
+browser.storage.local.get(["blockList", "isRunning"]).then((res) => {
   urlLinks = res.blockList || [];
 
   if (res.isRunning) {
@@ -10,7 +12,7 @@ chrome.storage.local.get(["blockList", "isRunning"], (res) => {
   }
 });
 
-chrome.storage.onChanged.addListener((changes) => {
+browser.storage.onChanged.addListener((changes) => {
   if (changes.blockList) {
     urlLinks = changes.blockList.newValue;
   }

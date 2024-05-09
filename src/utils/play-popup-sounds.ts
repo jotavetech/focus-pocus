@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill';
+
 function playFinishedSound() {
   let finishedSound = new Audio("/assets/sounds/finished.mp3");
   finishedSound.play();
@@ -15,7 +17,7 @@ function playGiveUpSound() {
 
 function playSound(soundType: "giveup" | "finished" | "button") {
   if (soundType === "giveup") {
-    chrome.storage.local.get("options", (data) => {
+    browser.storage.local.get("options").then((data) => {
       if (data.options && data.options["give-up-sound"]) {
         playGiveUpSound();
       }
@@ -24,7 +26,7 @@ function playSound(soundType: "giveup" | "finished" | "button") {
   }
 
   if (soundType === "finished") {
-    chrome.storage.local.get("options", (data) => {
+    browser.storage.local.get("options").then((data) => {
       if (data.options && data.options["victorious-sound"]) {
         playFinishedSound();
       }
@@ -32,7 +34,7 @@ function playSound(soundType: "giveup" | "finished" | "button") {
     return;
   }
 
-  chrome.storage.local.get("options", (data) => {
+  browser.storage.local.get("options").then((data) => {
     if (data.options && data.options["button-sound"]) {
       playButtonPressSound();
     }

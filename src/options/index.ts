@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill';
+
 const options = document.querySelectorAll(
   'input[type="checkbox"]'
 ) as NodeListOf<HTMLInputElement>;
@@ -14,7 +16,7 @@ let blockList: string[] = [];
 
 // sound options
 
-chrome.storage.local.get(["isRunning", "options", "blockList"], (data) => {
+browser.storage.local.get(["isRunning", "options", "blockList"]).then((data) => {
   if (data.isRunning) {
     urlInput.disabled = true;
     sendButton.disabled = true;
@@ -35,7 +37,7 @@ chrome.storage.local.get(["isRunning", "options", "blockList"], (data) => {
   }
 });
 
-chrome.storage.onChanged.addListener((changes) => {
+browser.storage.onChanged.addListener((changes) => {
   if (changes.isRunning && changes.isRunning.newValue) {
     urlInput.disabled = true;
     sendButton.disabled = true;
@@ -51,10 +53,10 @@ chrome.storage.onChanged.addListener((changes) => {
 
 options.forEach((option) => {
   option.addEventListener("change", () => {
-    chrome.storage.local.get("options", (data) => {
+    browser.storage.local.get("options").then((data) => {
       let options = data.options || {};
       options[option.id] = option.checked;
-      chrome.storage.local.set({ options });
+      browser.storage.local.set({ options });
     });
   });
 });
@@ -66,7 +68,7 @@ urlForm.addEventListener("submit", (e) => {
   if (!urlInput.value) return alert("Please enter a URL.");
 
   blockList.push(urlInput.value);
-  chrome.storage.local.set({ blockList });
+  browser.storage.local.set({ blockList });
   addUrlListElement(urlInput.value);
   urlInput.value = "";
 });
@@ -94,7 +96,7 @@ function removeUrlListElement(url: string) {
     return alert("You can't remove a website while the focus mode is running.");
 
   blockList = blockList.filter((u) => u !== url);
-  chrome.storage.local.set({ blockList });
+  browser.storage.local.set({ blockList });
 
   let ul = document.querySelector(".website-list") as HTMLUListElement;
   ul.innerHTML = "";
@@ -123,7 +125,7 @@ removeAllButton.addEventListener("click", () => {
     return alert("You can't remove a website while the focus mode is running.");
 
   blockList = [];
-  chrome.storage.local.set({ blockList });
+  browser.storage.local.set({ blockList });
 
   let ul = document.querySelector(".website-list") as HTMLUListElement;
   ul.innerHTML = "";
