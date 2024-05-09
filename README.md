@@ -8,7 +8,7 @@
     <img src="https://img.shields.io/badge/chrome-extension-8A2BE2" alt="Chrome extension" />
 </div>
 
-> FocusPocus is a Chrome extension created to help you maintain focus on your studies by blocking access to pages that may distract you during focus mode.
+> FocusPocus is a browser extension created to help you maintain focus on your studies by blocking access to pages that may distract you during focus mode.
 
 ![FocusPocus icon (a clock) with the text 'FocusPocus' and below a slogan 'Stay focused as if under a magical spell'](https://i.imgur.com/pn5aZcT.png)
 
@@ -42,7 +42,12 @@ git clone https://github.com/jotavetech/focus-pocus.git
 cd focus-pocus
 
 yarn #install the dependencies
-yarn dev #run and compile to /dest folder
+
+# chrome:
+yarn dev:chrome #compile to /dest/chrome folder
+
+# firefox:
+yarn dev:firefox #compile to /dest/firefox folder
 ```
 
 _with npm:_
@@ -52,7 +57,12 @@ git clone https://github.com/jotavetech/focus-pocus.git
 cd focus-pocus
 
 npm install #install the dependencies
-npm run dev #run and compile to /dest folder
+
+# chrome:
+npm run dev:chrome #compile to /dest/chrome folder
+
+#firefox:
+npm run dev:firefox #compile to /dest/firefox folder
 ```
 
 ### How to contribute
@@ -61,5 +71,12 @@ npm run dev #run and compile to /dest folder
 2. Clone your fork on your machine.
 3. Make your changes, commit and push these.
 4. Open a pull request (Write a descriptive message about what you've changed).
+
+### Contributors
+
+A big thank you to everyone who contributed to FocusPocus
+
+<a href="https://github.com/jotavetech" target="_blank"><img src="https://avatars.githubusercontent.com/u/92704272?v=4" alt="jotavetech picture" style="width: 80px" /></a>
+<a href="https://github.com/Ryrden" target="_blank"><img src="https://avatars.githubusercontent.com/u/76923948?v=4" alt="ryrden picture" style="width: 80px" /></a>
 
 Thank you ❤️
