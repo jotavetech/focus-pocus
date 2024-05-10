@@ -1,4 +1,4 @@
-import browser from 'webextension-polyfill';
+import browser from "webextension-polyfill";
 
 const options = document.querySelectorAll(
   'input[type="checkbox"]'
@@ -14,28 +14,28 @@ const removeAllButton = document.querySelector(
 let timerIsRunning = false;
 let blockList: string[] = [];
 
-// sound options
+browser.storage.local
+  .get(["isRunning", "options", "blockList"])
+  .then((data) => {
+    if (data.isRunning) {
+      urlInput.disabled = true;
+      sendButton.disabled = true;
+      timerIsRunning = true;
+    }
 
-browser.storage.local.get(["isRunning", "options", "blockList"]).then((data) => {
-  if (data.isRunning) {
-    urlInput.disabled = true;
-    sendButton.disabled = true;
-    timerIsRunning = true;
-  }
+    if (data.options) {
+      options.forEach((option) => {
+        option.checked = data.options[option.id];
+      });
+    }
 
-  if (data.options) {
-    options.forEach((option) => {
-      option.checked = data.options[option.id];
-    });
-  }
-
-  if (data.blockList) {
-    blockList = data.blockList;
-    blockList.forEach((url) => {
-      addUrlListElement(url);
-    });
-  }
-});
+    if (data.blockList) {
+      blockList = data.blockList;
+      blockList.forEach((url) => {
+        addUrlListElement(url);
+      });
+    }
+  });
 
 browser.storage.onChanged.addListener((changes) => {
   if (changes.isRunning && changes.isRunning.newValue) {

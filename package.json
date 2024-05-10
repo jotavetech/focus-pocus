@@ -11,9 +11,10 @@
     "build:firefox": "cross-env BROWSER_TARGET=firefox webpack --mode production"
   },
   "keywords": [],
-  "author": "",
+  "author": "@jotavetech",
   "license": "ISC",
   "devDependencies": {
+    "@babel/eslint-parser": "^7.24.5",
     "@types/webextension-polyfill": "^0.10.7",
     "copy-webpack-plugin": "^12.0.2",
     "cross-env": "^7.0.3",

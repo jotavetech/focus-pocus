@@ -16,8 +16,8 @@
 
   "browser_action": {
     "default_icon": {
-      "16": "assets/logo/icon-32.png",
-      "32": "assets/logo/icon-32.png",
+      "16": "/assets/logo/icon-32.png",
+      "32": "/assets/logo/icon-32.png",
       "48": "/assets/logo/icon-64.png",
       "96": "/assets/logo/icon-128.png"
     },
