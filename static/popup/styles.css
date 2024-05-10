@@ -45,12 +45,12 @@ header h1 {
   font-weight: 400;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 
 header h1 img {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
 }
 
 header nav {
