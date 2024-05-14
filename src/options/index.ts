@@ -1,14 +1,14 @@
 import browser from "webextension-polyfill";
 
 const options = document.querySelectorAll(
-  'input[type="checkbox"]'
+  'input[type="checkbox"]',
 ) as NodeListOf<HTMLInputElement>;
 
 const urlForm = document.querySelector("#block-list-form") as HTMLFormElement;
 const urlInput = document.querySelector("#url-input") as HTMLInputElement;
 const sendButton = document.querySelector("#send-button") as HTMLButtonElement;
 const removeAllButton = document.querySelector(
-  "#remove-all-button"
+  "#remove-all-button",
 ) as HTMLButtonElement;
 
 let timerIsRunning = false;

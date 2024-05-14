@@ -35,7 +35,7 @@ function updateTimer() {
 
       const options = Array.from(selectTime.options);
       const matchingOption = options.find(
-        (option) => option.value === selectedTime.toString()
+        (option) => option.value === selectedTime.toString(),
       );
       if (matchingOption) {
         matchingOption.selected = true;

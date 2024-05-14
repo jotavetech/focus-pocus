@@ -2,7 +2,7 @@ import browser from "webextension-polyfill";
 
 function playFinishedSound() {
   let finishedSound = new Audio(
-    browser.runtime.getURL("/assets/sounds/finished.mp3")
+    browser.runtime.getURL("/assets/sounds/finished.mp3"),
   );
   finishedSound.load();
   finishedSound.play();
@@ -10,7 +10,7 @@ function playFinishedSound() {
 
 function playButtonPressSound() {
   let pressSound = new Audio(
-    browser.runtime.getURL("/assets/sounds/press.mp3")
+    browser.runtime.getURL("/assets/sounds/press.mp3"),
   );
   pressSound.load();
   pressSound.play();
@@ -18,7 +18,7 @@ function playButtonPressSound() {
 
 function playGiveUpSound() {
   let giveUpSound = new Audio(
-    browser.runtime.getURL("/assets/sounds/lose.wav")
+    browser.runtime.getURL("/assets/sounds/lose.wav"),
   );
   giveUpSound.load();
   giveUpSound.play();
