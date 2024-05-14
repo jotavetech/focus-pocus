@@ -1,4 +1,4 @@
-import browser from 'webextension-polyfill';
+import browser from "webextension-polyfill";
 
 let urlLinks: string[] = [];
 
@@ -22,6 +22,17 @@ browser.storage.onChanged.addListener((changes) => {
   }
 
   if (changes.isRunning && !changes.isRunning.newValue) {
+    const focusPage = document.querySelector("#focus-page");
+    if (focusPage) {
+      focusPage.remove();
+      const tabId = getCurrentTabId()!;
+      tabStates.delete(tabId);
+    }
+  }
+});
+
+browser.runtime.onMessage.addListener((message) => {
+  if (message.type === "TIMER_FINISHED") {
     const focusPage = document.querySelector("#focus-page");
     if (focusPage) {
       focusPage.remove();

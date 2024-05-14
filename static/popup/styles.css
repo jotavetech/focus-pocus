@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 :root {
   --strong: #27191c;
@@ -26,6 +26,7 @@ body {
   border-radius: 10px;
   width: 290px;
   background: var(--medium);
+  border: none;
 }
 
 header {
@@ -36,7 +37,6 @@ header {
   justify-content: space-between;
   padding: 0 12px;
   background: var(--normal);
-  border-bottom: 2px solid var(--strong);
 }
 
 header h1 {
@@ -82,11 +82,6 @@ header .streak #streak-counter {
   color: #fff;
 }
 
-header button img {
-  width: 25px;
-  height: 25px;
-}
-
 main {
   display: flex;
   flex-direction: column;
@@ -112,7 +107,7 @@ main {
   color: #fff;
 }
 
-.status #select-time option {
+#select-time option {
   background: var(--semistrong);
   color: #fff;
 }
@@ -123,14 +118,15 @@ main {
   align-items: center;
 }
 
-.app #timer-counter {
+#timer-counter {
   font-weight: 700;
-  font-size: 84px;
+  font-size: 64px;
   color: #fff;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
-.app #start {
+#start {
   width: 220px;
   height: 62px;
   background: #fff;
@@ -140,10 +136,27 @@ main {
   font-size: 20px;
 }
 
-.app #start:hover {
+#start:hover {
   opacity: 85%;
 }
 
-.app #start:active {
+#start:active {
   transform: scale(0.95);
+}
+
+#custom-input {
+  display: none;
+  font-weight: 700;
+  font-size: 64px;
+  color: #fff;
+  text-align: center;
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+#custom-input:active,
+#custom-input:focus {
+  background-color: transparent;
+  transition: none;
 }

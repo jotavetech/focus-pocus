@@ -1,5 +1,6 @@
+import browser from "webextension-polyfill";
 import { getStreakAndIncrement } from "./services/streak";
-import browser from 'webextension-polyfill';
+import { checkAndStopTimer } from "./services/timer";
 
 browser.alarms.create("timeRunner", {
   periodInMinutes: 1 / 60,
@@ -7,30 +8,38 @@ browser.alarms.create("timeRunner", {
 
 browser.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "timeRunner") {
-    browser.storage.local.get(["timer", "isRunning", "selectedTime"]).then((res) => {
-      if (res.isRunning) {
-        let timer = res.timer + 1;
-        let isRunning = true;
+    browser.storage.local
+      .get(["timer", "isRunning", "selectedTime"])
+      .then((res) => {
+        if (res.isRunning) {
+          let timer = res.timer + 1;
+          let isRunning = true;
 
-        if (timer === 60 * res.selectedTime) {
-          timer = 0;
-          isRunning = false;
-          getStreakAndIncrement();
+          if (timer >= res.selectedTime) {
+            timer = 0;
+            isRunning = false;
+            getStreakAndIncrement();
+          }
+
+          browser.storage.local.set({
+            timer,
+            isRunning,
+          });
+
+          if (!isRunning) {
+            checkAndStopTimer();
+          }
         }
-
-        browser.storage.local.set({
-          timer,
-          isRunning,
-        });
-      }
-    });
+      });
   }
 });
 
-browser.storage.local.get(["timer", "isRunning", "selectedTime"]).then((res) => {
-  browser.storage.local.set({
-    timer: "timer" in res ? res.timer : 0,
-    selectedTime: "selectedTime" in res ? res.selectedTime : 25,
-    isRunning: "isRunning" in res ? res.isRunning : false,
+browser.storage.local
+  .get(["timer", "isRunning", "selectedTime"])
+  .then((res) => {
+    browser.storage.local.set({
+      timer: "timer" in res ? res.timer : 0,
+      selectedTime: "selectedTime" in res ? res.selectedTime : 25,
+      isRunning: "isRunning" in res ? res.isRunning : false,
+    });
   });
-});

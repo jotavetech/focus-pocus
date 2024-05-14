@@ -1,4 +1,4 @@
-import browser from 'webextension-polyfill';
+import browser from "webextension-polyfill";
 
 function pushFinishedSessionNotification() {
   browser.notifications.create({

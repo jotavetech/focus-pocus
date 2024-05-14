@@ -1,17 +1,26 @@
-import browser from 'webextension-polyfill';
+import browser from "webextension-polyfill";
 
 function playFinishedSound() {
-  let finishedSound = new Audio("/assets/sounds/finished.mp3");
+  let finishedSound = new Audio(
+    browser.runtime.getURL("/assets/sounds/finished.mp3")
+  );
+  finishedSound.load();
   finishedSound.play();
 }
 
 function playButtonPressSound() {
-  let pressSound = new Audio("/assets/sounds/press.mp3");
+  let pressSound = new Audio(
+    browser.runtime.getURL("/assets/sounds/press.mp3")
+  );
+  pressSound.load();
   pressSound.play();
 }
 
 function playGiveUpSound() {
-  let giveUpSound = new Audio("/assets/sounds/lose.wav");
+  let giveUpSound = new Audio(
+    browser.runtime.getURL("/assets/sounds/lose.wav")
+  );
+  giveUpSound.load();
   giveUpSound.play();
 }
 
