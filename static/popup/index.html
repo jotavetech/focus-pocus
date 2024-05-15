@@ -1,37 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>UNTILED</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FocusPocus</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header>
-      <h1><img src="../assets/img/clock.svg" />FocusPocus</h1>
+      <h1><img src="../assets/img/clock.svg" alt="Clock Icon" />FocusPocus</h1>
       <nav>
         <div class="streak">
           <span id="streak-counter">0</span>
-          <img src="../assets/img/flame.svg" alt="flame icon" />
+          <img src="../assets/img/flame.svg" alt="Flame Icon" />
         </div>
         <button id="config">
-          <img src="../assets/img/settings.svg" alt="settings icon" />
+          <img src="../assets/img/settings.svg" alt="Settings Icon" />
         </button>
       </nav>
     </header>
     <main>
       <select id="select-time">
-        <option value="1" selected>1 MIN</option>
-        <option value="15" selected>15 MIN</option>
-        <option value="25">25 MIN</option>
-        <option value="30">30 MIN</option>
-        <option value="45">45 MIN</option>
-        <option value="60">1 HOUR</option>
+        <option value="60">1 MIN</option>
+        <option value="900" selected>15 MIN</option>
+        <option value="1500">25 MIN</option>
+        <option value="1800">30 MIN</option>
+        <option value="2700">45 MIN</option>
+        <option value="3600">1 HOUR</option>
       </select>
-
       <div class="app">
-        <p id="timer-counter">15:00</p>
+        <input id="custom-input" type="text" placeholder="hh:mm:ss" />
+        <p id="timer-counter">00:15:00</p>
         <button id="start">START FOCUSING</button>
       </div>
     </main>
+    <script src="../popup.js"></script>
   </body>
-  <script src="../popup.js"></script>
 </html>

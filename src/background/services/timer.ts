@@ -1,7 +1,5 @@
-import browser from 'webextension-polyfill';
-
+import browser from "webextension-polyfill";
 import playSound from "../../utils/play-popup-sounds";
-
 import { resetStreak } from "./streak";
 
 function stopTimer() {
@@ -26,10 +24,21 @@ function handleStartTimer() {
   });
 }
 
-function changeSelectedTime(time: number) {
+function changeSelectedTime(seconds: number, label: string) {
   browser.storage.local.set({
-    selectedTime: time,
+    selectedTime: seconds,
+    timeLabel: label,
   });
 }
 
-export { handleStartTimer, changeSelectedTime };
+function checkAndStopTimer() {
+  browser.storage.local.get(["timer", "selectedTime"]).then((res) => {
+    if (res.timer >= res.selectedTime) {
+      stopTimer();
+      playSound("finished");
+      browser.runtime.sendMessage({ type: "TIMER_FINISHED" });
+    }
+  });
+}
+
+export { changeSelectedTime, checkAndStopTimer, handleStartTimer, stopTimer };
