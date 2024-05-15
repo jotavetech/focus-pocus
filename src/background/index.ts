@@ -16,7 +16,6 @@ browser.alarms.onAlarm.addListener((alarm) => {
           let isRunning = true;
 
           if (timer >= res.selectedTime) {
-            timer = 0;
             isRunning = false;
             getStreakAndIncrement();
           }

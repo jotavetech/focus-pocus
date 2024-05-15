@@ -1,9 +1,7 @@
 import browser from "webextension-polyfill";
-import { getStreakAndIncrement } from "../background/services/streak";
 import {
   changeSelectedTime,
   handleStartTimer,
-  stopTimer,
 } from "../background/services/timer";
 import changePopupColor from "../utils/change-popup-color";
 import playSound from "../utils/play-popup-sounds";
@@ -20,6 +18,7 @@ let isTimerRunning = false;
 function changeAppStyleMode(isRunning: boolean) {
   changePopupColor(isRunning);
   startButton.innerHTML = isRunning ? "GIVE UP!" : "START FOCUSING";
+  timerDisplay.style.pointerEvents = isRunning ? "none" : "auto";
   selectTime.disabled = isRunning;
   customInput.disabled = isRunning;
 }
@@ -35,7 +34,7 @@ function updateTimer() {
 
       const options = Array.from(selectTime.options);
       const matchingOption = options.find(
-        (option) => option.value === selectedTime.toString(),
+        (option) => option.value === selectedTime.toString()
       );
       if (matchingOption) {
         matchingOption.selected = true;
@@ -49,6 +48,7 @@ function updateTimer() {
       } else {
         timerDisplay.innerHTML = formatTime(totalSecondsLeft);
       }
+      isTimerRunning = isRunning;
       changeAppStyleMode(isRunning);
     });
 }
@@ -160,8 +160,6 @@ function updateSelectOption(seconds: number, label: string) {
 }
 
 function handleTimerEnd() {
-  getStreakAndIncrement();
-  stopTimer();
   isTimerRunning = false;
   startButton.textContent = "START FOCUSING";
   selectTime.disabled = false;
@@ -169,7 +167,6 @@ function handleTimerEnd() {
   customInput.style.display = "none";
   timerDisplay.style.display = "block";
   timerDisplay.style.pointerEvents = "auto";
-  playSound("finished");
 }
 
 browser.storage.onChanged.addListener((changes) => {
@@ -203,7 +200,7 @@ customInput.addEventListener("keypress", (event) => {
 
 startButton.addEventListener("click", () => {
   isTimerRunning = !isTimerRunning;
-  startButton.textContent = isTimerRunning ? "STOP" : "START FOCUSING";
+  startButton.textContent = isTimerRunning ? "GIVE UP!" : "START FOCUSING";
   timerDisplay.style.pointerEvents = isTimerRunning ? "none" : "auto";
 });
 
