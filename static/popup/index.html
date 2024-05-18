@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,7 +20,7 @@
       </nav>
     </header>
     <main>
-      <select id="select-time">
+      <select id="select-time" aria-label="Select time">
         <option value="60">1 MIN</option>
         <option value="900" selected>15 MIN</option>
         <option value="1500">25 MIN</option>
@@ -29,7 +29,12 @@
         <option value="3600">1 HOUR</option>
       </select>
       <div class="app">
-        <input id="custom-input" type="text" placeholder="hh:mm:ss" />
+        <input
+          id="custom-input"
+          type="text"
+          placeholder="hh:mm:ss"
+          maxlength="8"
+        />
         <p id="timer-counter">00:15:00</p>
         <button id="start">START FOCUSING</button>
       </div>

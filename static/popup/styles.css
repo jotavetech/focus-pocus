@@ -145,6 +145,8 @@ main {
 }
 
 #custom-input {
+  max-width: 290px;
+  overflow-x: hidden;
   display: none;
   font-weight: 700;
   font-size: 64px;

@@ -5,7 +5,7 @@
 <div>
     <img src="https://img.shields.io/github/languages/top/jotavetech/focus-pocus" alt="Most used language" />
     <img src="https://img.shields.io/github/last-commit/jotavetech/focus-pocus" alt="Last commit" />
-    <img src="https://img.shields.io/badge/chrome-extension-8A2BE2" alt="Chrome extension" />
+    <img src="https://img.shields.io/badge/browser-extension-8A2BE2" alt="Browser extension" />
 </div>
 
 > FocusPocus is a browser extension created to help you maintain focus on your studies by blocking access to pages that may distract you during focus mode.
