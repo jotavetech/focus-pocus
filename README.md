@@ -21,11 +21,11 @@
 
 ### Todo
 
-- [ ] Add custom timer settings.
+- [x] Add custom timer settings.
 - [ ] Add allowed list mode.
 - [ ] Add groups for the blocked websites list.
 - [ ] Add a verification prompt before giving up.
-- [ ] Add support for other browsers.
+- [x] Add support for other browsers.
 - [ ] Add PT-BR language support.
 
 ### How to run locally
