@@ -2,36 +2,30 @@ import browser from "webextension-polyfill";
 import { getStreakAndIncrement } from "./services/streak";
 import { checkAndStopTimer } from "./services/timer";
 
-browser.alarms.create("timeRunner", {
-  periodInMinutes: 1 / 60,
-});
+setInterval(() => {
+  browser.storage.local
+    .get(["timer", "isRunning", "selectedTime"])
+    .then((res) => {
+      if (res.isRunning) {
+        let timer = res.timer + 1;
+        let isRunning = true;
 
-browser.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === "timeRunner") {
-    browser.storage.local
-      .get(["timer", "isRunning", "selectedTime"])
-      .then((res) => {
-        if (res.isRunning) {
-          let timer = res.timer + 1;
-          let isRunning = true;
-
-          if (timer >= res.selectedTime) {
-            isRunning = false;
-            getStreakAndIncrement();
-          }
-
-          browser.storage.local.set({
-            timer,
-            isRunning,
-          });
-
-          if (!isRunning) {
-            checkAndStopTimer();
-          }
+        if (timer >= res.selectedTime) {
+          isRunning = false;
+          getStreakAndIncrement();
         }
-      });
-  }
-});
+
+        browser.storage.local.set({
+          timer,
+          isRunning,
+        });
+
+        if (!isRunning) {
+          checkAndStopTimer();
+        }
+      }
+    });
+}, 1000);
 
 browser.storage.local
   .get(["timer", "isRunning", "selectedTime"])

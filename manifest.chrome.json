@@ -12,7 +12,7 @@
     "128": "assets/logo/icon-128.png"
   },
 
-  "permissions": ["storage", "alarms", "notifications"],
+  "permissions": ["storage", "notifications"],
 
   "action": {
     "default_popup": "/popup/index.html"
