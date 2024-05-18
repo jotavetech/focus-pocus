@@ -1,6 +1,15 @@
 # FocusPocus
 
-[Demo Video](https://www.youtube.com/watch?v=4UI_6rQ95HU)
+[Demo Video](https://www.youtube.com/watch?v=AeRzctRV-4s)
+
+### Download
+
+The last published version:
+
+- [Google Web Store](https://chromewebstore.google.com/detail/focuspocus-in-magical-foc/mhfhegccdlndlipjicelombmchnpdebc?hl=en)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/focuspocus-in-magical-focus/)
+
+### About
 
 <div>
     <img src="https://img.shields.io/github/languages/top/jotavetech/focus-pocus" alt="Most used language" />
@@ -69,7 +78,7 @@ npm run dev:firefox #compile to /dest/firefox folder
 
 1. Fork this repository.
 2. Clone your fork on your machine.
-3. Make your changes, commit and push these.
+3. Create a new branch, make your changes, commit and push these.
 4. Open a pull request (Write a descriptive message about what you've changed).
 
 ### Contributors
@@ -80,4 +89,4 @@ A big thank you to everyone who contributed to FocusPocus
 <a href="https://github.com/Ryrden" target="_blank"><img src="https://avatars.githubusercontent.com/u/76923948?v=4" alt="ryrden picture" style="width: 80px" /></a>
 <a href="https://github.com/gabireze" target="_blank"><img src="https://avatars.githubusercontent.com/u/31194373?v=4" alt="gabizere picture" style="width: 80px" /></a>
 
-Thank you ❤️
+[Support Me 💛](https://www.pixme.bio/jotavetech)
