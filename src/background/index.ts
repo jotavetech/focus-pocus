@@ -38,7 +38,8 @@ browser.storage.local
   .then((res) => {
     browser.storage.local.set({
       timer: "timer" in res ? res.timer : 0,
-      selectedTime: "selectedTime" in res ? res.selectedTime : 25,
+      selectedTime: "selectedTime" in res ? res.selectedTime : 900,
       isRunning: "isRunning" in res ? res.isRunning : false,
+      streak: "streak" in res ? res.streak : 0,
     });
   });
