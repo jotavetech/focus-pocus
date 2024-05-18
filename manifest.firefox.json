@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "FocusPocus: In Magical Focus",
   "description": "Stay focused as if under a magical spell.",
-  "version": "1.0",
+  "version": "1.0.1",
   "author": "@jotavetech",
 
   "icons": {
