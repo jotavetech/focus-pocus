@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "FocusPocus: In Magical Focus",
+  "name": "FocusPocus: Block Distractions & Stay Focused",
   "description": "Stay focused as if under a magical spell.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "@jotavetech",
 
   "icons": {
@@ -12,7 +12,7 @@
     "128": "assets/logo/icon-128.png"
   },
 
-  "permissions": ["storage", "notifications", "alarms"],
+  "permissions": ["storage", "notifications"],
 
   "action": {
     "default_popup": "/popup/index.html"
