@@ -58,6 +58,13 @@ function addFocusPage() {
           `;
         document.querySelector("body")!.appendChild(focusPage);
 
+        document.querySelectorAll("video").forEach((video) => {
+          video.pause();
+        });
+        document.querySelectorAll("audio").forEach((audio) => {
+          audio.pause();
+        });
+
         tabStates.set(currentTabId, true);
         return;
       }
