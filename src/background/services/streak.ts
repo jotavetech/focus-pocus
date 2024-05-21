@@ -13,6 +13,7 @@ async function getStreakAndIncrement() {
   browser.storage.local.get(["streak"]).then((res) => {
     const streak = res.streak || 0;
     browser.storage.local.set({ streak: streak + 1 });
+    browser.action.setIcon({ path: "assets/logo/icon-32.png" });
     pushFinishedSessionNotification();
   });
 }
