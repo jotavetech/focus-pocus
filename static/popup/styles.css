@@ -92,7 +92,7 @@ main {
 }
 
 #select-time {
-  width: 220px;
+  width: 250px;
   height: 32px;
   display: flex;
   justify-content: center;
@@ -127,7 +127,7 @@ main {
 }
 
 #start {
-  width: 220px;
+  width: 250px;
   height: 62px;
   background: #fff;
   border-radius: 25px;

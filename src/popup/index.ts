@@ -29,6 +29,8 @@ function updateTimer() {
     .then((res) => {
       const { timer, selectedTime, timeLabel, isRunning, streak } = res;
 
+      console.log("streak", streak);
+
       selectTime.value = selectedTime.toString() || "60";
       streakCounter.innerHTML = streak.toString() || "0";
 
@@ -52,6 +54,16 @@ function updateTimer() {
       changeAppStyleMode(isRunning);
     });
 }
+
+function checkIfIsRunningAndSendAMessage() {
+  browser.storage.local.get(["isRunning"]).then((res) => {
+    if (res.isRunning) {
+      browser.runtime.sendMessage({ type: "TIMER_STARTED" });
+    }
+  });
+}
+
+checkIfIsRunningAndSendAMessage();
 
 function formatTime(totalSeconds: number): string {
   const hours = Math.floor(totalSeconds / 3600);

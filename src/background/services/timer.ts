@@ -1,12 +1,24 @@
 import browser from "webextension-polyfill";
 import playSound from "../../utils/play-popup-sounds";
+
 import { resetStreak } from "./streak";
 
 function stopTimer() {
+  browser.runtime.sendMessage({ type: "TIMER_FINISHED" });
+
   browser.storage.local.set({
     isRunning: false,
     timer: 0,
   });
+}
+
+function startTimer() {
+  browser.storage.local.set({
+    isRunning: true,
+    timer: 0,
+  });
+
+  browser.runtime.sendMessage({ type: "TIMER_STARTED" });
 }
 
 function handleStartTimer() {
@@ -18,9 +30,7 @@ function handleStartTimer() {
       return;
     }
 
-    browser.storage.local.set({
-      isRunning: true,
-    });
+    startTimer();
   });
 }
 
@@ -36,7 +46,6 @@ function checkAndStopTimer() {
     if (res.timer >= res.selectedTime) {
       stopTimer();
       playSound("finished");
-      browser.runtime.sendMessage({ type: "TIMER_FINISHED" });
     }
   });
 }
