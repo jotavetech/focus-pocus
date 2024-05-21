@@ -10,6 +10,10 @@ function stopTimer() {
     isRunning: false,
     timer: 0,
   });
+
+  browser.action.setIcon({
+    path: browser.runtime.getURL("assets/logo/icon-32.png"),
+  });
 }
 
 function startTimer() {
@@ -19,6 +23,10 @@ function startTimer() {
   });
 
   browser.runtime.sendMessage({ type: "TIMER_STARTED" });
+
+  browser.action.setIcon({
+    path: browser.runtime.getURL("assets/logo/icon-32-active.png"),
+  });
 }
 
 function handleStartTimer() {

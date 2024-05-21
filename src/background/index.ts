@@ -7,8 +7,10 @@ let interval: NodeJS.Timeout;
 browser.runtime.onMessage.addListener((message) => {
   if (message.type === "TIMER_STARTED") {
     startTimer();
+    browser.action.setIcon({ path: "assets/logo/icon-32-active.png" });
   } else if (message.type === "TIMER_FINISHED") {
     stopTimer();
+    browser.action.setIcon({ path: "assets/logo/icon-32.png" });
   }
 });
 
