@@ -25,6 +25,10 @@ body {
   align-items: center;
 }
 
+body[data-isrunning="true"] .remove-button {
+  filter: grayscale(1);
+}
+
 #app {
   width: 380px;
   height: 570px;
@@ -246,15 +250,15 @@ footer a {
   transition: 0.4s;
 }
 
-.switch input:checked + .slider {
+.switch input:checked+.slider {
   background-color: var(--medium);
 }
 
-.switch input:focus + .slider {
+.switch input:focus+.slider {
   box-shadow: 0 0 1px var(--semistrong);
 }
 
-.switch input:checked + .slider:before {
+.switch input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);

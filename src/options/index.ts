@@ -21,6 +21,7 @@ browser.storage.local
       // urlInput.disabled = true;
       // sendButton.disabled = true;
       timerIsRunning = true;
+      document.body.dataset.isrunning = "true"
     }
 
     if (data.options) {
@@ -42,12 +43,14 @@ browser.storage.onChanged.addListener((changes) => {
     // urlInput.disabled = true;
     // sendButton.disabled = true;
     timerIsRunning = true;
+    document.body.dataset.isrunning = "true"
   }
 
   if (changes.isRunning && !changes.isRunning.newValue) {
     urlInput.disabled = false;
     sendButton.disabled = false;
     timerIsRunning = false;
+    document.body.dataset.isrunning = "false"
   }
 });
 
