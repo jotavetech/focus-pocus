@@ -18,8 +18,8 @@ browser.storage.local
   .get(["isRunning", "options", "blockList"])
   .then((data) => {
     if (data.isRunning) {
-      urlInput.disabled = true;
-      sendButton.disabled = true;
+      // urlInput.disabled = true;
+      // sendButton.disabled = true;
       timerIsRunning = true;
     }
 
@@ -39,8 +39,8 @@ browser.storage.local
 
 browser.storage.onChanged.addListener((changes) => {
   if (changes.isRunning && changes.isRunning.newValue) {
-    urlInput.disabled = true;
-    sendButton.disabled = true;
+    // urlInput.disabled = true;
+    // sendButton.disabled = true;
     timerIsRunning = true;
   }
 
@@ -63,8 +63,8 @@ options.forEach((option) => {
 
 urlForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (timerIsRunning)
-    return alert("You can't add a website while the focus mode is running.");
+  // if (timerIsRunning)
+  //   return alert("You can't add a website while the focus mode is running.");
   if (!urlInput.value) return alert("Please enter a URL.");
 
   blockList.push(urlInput.value);
