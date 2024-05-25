@@ -86,9 +86,30 @@ function createUrlListElement(url: string) {
   return li;
 }
 
+
+function checkUrlListElements(url: string) {
+
+  const list = document.querySelector(" .website-list") as HTMLUListElement;
+
+  const childs = list.childNodes
+
+  for (let index = 0; index < childs.length; index++) {
+    const element = childs[index];
+
+    if (element.firstChild?.nextSibling?.textContent === url) {
+      return true
+    }
+  }
+}
+
 function addUrlListElement(url: string) {
   let ul = document.querySelector(".website-list") as HTMLUListElement;
-  ul.appendChild(createUrlListElement(url));
+  if (checkUrlListElements(url)) {
+    alert("Repeated Item")
+  } else {
+    ul.appendChild(createUrlListElement(url));
+  }
+
 }
 
 function removeUrlListElement(url: string) {
