@@ -67,10 +67,10 @@ urlForm.addEventListener("submit", (e) => {
     return alert("You can't add a website while the focus mode is running.");
   if (!urlInput.value) return alert("Please enter a URL.");
 
-
+  if (!isValidURL(urlInput.value)) return alert("Please enter a valid URL.") // verify URL
 
   if (checkUrlListElements(urlInput.value)) {
-      // if url exists in website-lsit div, return alert
+      // if url exists in website-list div, return alert
       return alert("This URL already exists")
   } else {
     // if url doesnt exist in website-list div, add new element to
@@ -81,6 +81,13 @@ urlForm.addEventListener("submit", (e) => {
 
   urlInput.value = "";
 });
+
+
+function isValidURL(url: string) {
+  const regex = /^(https?|ftp):\/\/[^\s\/$.?#].[^\s]*$/
+
+  return regex.test(url)
+}
 
 function createUrlListElement(url: string) {
   let li = document.createElement("li");
@@ -105,7 +112,7 @@ function checkUrlListElements(url: string) {
     const element = childs[index];
 
     if (element.firstChild?.nextSibling?.textContent === url) {
-      return true
+      return true // return true if is repeated element
     }
   }
 }
