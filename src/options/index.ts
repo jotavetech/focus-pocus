@@ -67,9 +67,18 @@ urlForm.addEventListener("submit", (e) => {
     return alert("You can't add a website while the focus mode is running.");
   if (!urlInput.value) return alert("Please enter a URL.");
 
-  blockList.push(urlInput.value);
-  browser.storage.local.set({ blockList });
-  addUrlListElement(urlInput.value);
+
+
+  if (checkUrlListElements(urlInput.value)) {
+      // if url exists in website-lsit div, return alert
+      return alert("This URL already exists")
+  } else {
+    // if url doesnt exist in website-list div, add new element to
+    blockList.push(urlInput.value);
+    browser.storage.local.set({ blockList });
+    addUrlListElement(urlInput.value);
+  }
+
   urlInput.value = "";
 });
 
@@ -85,7 +94,6 @@ function createUrlListElement(url: string) {
 
   return li;
 }
-
 
 function checkUrlListElements(url: string) {
 
@@ -104,12 +112,7 @@ function checkUrlListElements(url: string) {
 
 function addUrlListElement(url: string) {
   let ul = document.querySelector(".website-list") as HTMLUListElement;
-  if (checkUrlListElements(url)) {
-    alert("Repeated Item")
-  } else {
-    ul.appendChild(createUrlListElement(url));
-  }
-
+  ul.appendChild(createUrlListElement(url))
 }
 
 function removeUrlListElement(url: string) {
