@@ -3,10 +3,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 
 :root {
-  --strong: #001620;
-  --semistrong: #0e252f;
-  --medium: #1b333e;
-  --normal: #29424d;
+  --text: #fff;
+  --app-bg: #0b0b0b;
+  --action-bg: #171717;
+  --action-text: #fff;
+  --bg: #0d0d0d;
+  --website-bg: #9f0017;
+  --website-border: #b51026;
 }
 
 * {
@@ -19,7 +22,7 @@ body {
   font-family: "Roboto", sans-serif;
   width: 100vw;
   min-height: 100vh;
-  background: var(--strong);
+  background: var(--bg);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,9 +31,8 @@ body {
 #app {
   width: 380px;
   height: 570px;
-  background-color: var(--semistrong);
+  background-color: var(--app-bg);
   border-radius: 10px;
-  border-bottom: 5px solid var(--medium);
   padding: 25px 30px;
   position: relative;
 }
@@ -45,7 +47,7 @@ body {
   font-size: 32px;
   font-weight: 500;
   font-family: "Lora", serif;
-  color: #fff;
+  color: var(--text);
 }
 
 #app header img {
@@ -67,7 +69,7 @@ body {
 }
 
 #options .option p {
-  color: #fff;
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -75,7 +77,7 @@ body {
   width: 100%;
   border-radius: 10px;
   height: 2px;
-  background-color: var(--medium);
+  background-color: var(--text);
   margin-top: 20px;
   margin-bottom: 10px;
 }
@@ -83,7 +85,7 @@ body {
 #blocklist p {
   font-size: 12px;
   font-weight: 500;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 10px;
 }
 
@@ -97,25 +99,25 @@ body {
 #blocklist form input {
   width: 90%;
   height: 30px;
-  background: var(--medium);
-  border: 2px solid var(--normal);
+  background: var(--action-bg);
   outline: none;
+  border: none;
   border-radius: 5px;
-  color: #fff;
+  color: var(--text);
   padding: 8px;
   font-size: 14px;
 }
 
 #blocklist form input::placeholder {
-  color: #fff;
+  color: var(--text);
   opacity: 0.5;
 }
 
 #blocklist form button {
   width: 10%;
   height: 30px;
-  background: var(--normal);
-  border: 2px solid var(--medium);
+  background: var(--action-bg);
+  border: none;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -123,7 +125,7 @@ body {
 }
 
 #blocklist form button:hover {
-  background: var(--medium);
+  background: var(--bg);
   cursor: pointer;
 }
 
@@ -151,19 +153,19 @@ body {
   padding: 8px;
   display: flex;
   align-items: center;
-  background: #66324c;
-  border: 2px solid #992c4b;
+  background: var(--website-bg);
+  border: 2px solid var(--website-border);
   outline: none;
   border-radius: 5px;
-  color: #fff;
+  color: var(--text);
   font-size: 14px;
 }
 
 .website-list li button {
   width: 10%;
   height: 30px;
-  background: #992c4b;
-  border: 2px solid #66324c;
+  background: var(--website-bg);
+  border: 2px solid var(--website-border);
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -171,8 +173,8 @@ body {
 }
 
 .website-list li button:hover {
-  background: #66324c;
   cursor: pointer;
+  opacity: 0.8;
 }
 
 .website-list li button img {
@@ -200,7 +202,7 @@ footer button {
   border: none;
   cursor: pointer;
   font-weight: 500;
-  color: #ff4b7e;
+  color: var(--text);
 }
 
 footer a {
@@ -247,11 +249,7 @@ footer a {
 }
 
 .switch input:checked + .slider {
-  background-color: var(--medium);
-}
-
-.switch input:focus + .slider {
-  box-shadow: 0 0 1px var(--semistrong);
+  background-color: var(--action-bg);
 }
 
 .switch input:checked + .slider:before {

@@ -1,14 +1,16 @@
 function changePopupColor(isStarted: boolean) {
   if (isStarted) {
-    document.documentElement.style.setProperty("--strong", "#020001");
-    document.documentElement.style.setProperty("--semistrong", "#340016");
-    document.documentElement.style.setProperty("--medium", "#9f102c");
-    document.documentElement.style.setProperty("--normal", "#d43b2d");
+    document.documentElement.style.setProperty("--text", "#fff");
+    document.documentElement.style.setProperty("--header-bg", "#9f0017");
+    document.documentElement.style.setProperty("--action-bg", "#fff");
+    document.documentElement.style.setProperty("--action-text", "#9f0017");
+    document.documentElement.style.setProperty("--bg", "#b51026");
   } else {
-    document.documentElement.style.setProperty("--strong", "#27191c");
-    document.documentElement.style.setProperty("--semistrong", "#2d3839");
-    document.documentElement.style.setProperty("--medium", "#114d4d");
-    document.documentElement.style.setProperty("--normal", "#6e9987");
+    document.documentElement.style.setProperty("--text", "#fff");
+    document.documentElement.style.setProperty("--header-bg", "#0b0b0b");
+    document.documentElement.style.setProperty("--action-bg", "#171717");
+    document.documentElement.style.setProperty("--action-text", "#fff");
+    document.documentElement.style.setProperty("--bg", "#0d0d0d");
   }
 }
 

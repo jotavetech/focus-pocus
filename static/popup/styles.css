@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 :root {
-  --strong: #27191c;
-  --semistrong: #2d3839;
-  --medium: #114d4d;
-  --normal: #6e9987;
+  --text: #fff;
+  --header-bg: #0b0b0b;
+  --action-bg: #171717;
+  --action-text: #fff;
+  --bg: #0d0d0d;
 }
 
 * {
@@ -25,7 +26,7 @@ button {
 body {
   border-radius: 10px;
   width: 290px;
-  background: var(--medium);
+  background: var(--bg);
   border: none;
 }
 
@@ -35,8 +36,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
-  background: var(--normal);
+  padding: 0 15px;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--text);
 }
 
 header h1 {
@@ -79,7 +81,7 @@ header .streak {
 header .streak #streak-counter {
   font-size: 14px;
   font-weight: 500;
-  color: #fff;
+  color: var(--text);
 }
 
 main {
@@ -97,19 +99,19 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--semistrong);
+  background: var(--action-bg);
   border-radius: 10px;
   outline: none;
   border: none;
   padding: 0 10px;
   font-size: 14px;
   font-weight: 500;
-  color: #fff;
+  color: var(--action-text);
 }
 
 #select-time option {
-  background: var(--semistrong);
-  color: #fff;
+  background: var(--action-bg);
+  color: var(--action-text);
 }
 
 .app {
@@ -121,7 +123,7 @@ main {
 #timer-counter {
   font-weight: 700;
   font-size: 64px;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 10px;
   cursor: pointer;
 }
@@ -129,10 +131,10 @@ main {
 #start {
   width: 250px;
   height: 62px;
-  background: #fff;
+  background: var(--action-bg);
   border-radius: 25px;
   font-weight: 600;
-  color: var(--semistrong);
+  color: var(--action-text);
   font-size: 20px;
 }
 
@@ -150,7 +152,7 @@ main {
   display: none;
   font-weight: 700;
   font-size: 64px;
-  color: #fff;
+  color: var(--text);
   text-align: center;
   border: none;
   outline: none;

@@ -1,6 +1,6 @@
 {
   "name": "focus-pocus",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A extension that will help you to focus on your work",
   "main": "index.js",
   "scripts": {

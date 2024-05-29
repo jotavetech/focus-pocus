@@ -29,8 +29,6 @@ function updateTimer() {
     .then((res) => {
       const { timer, selectedTime, timeLabel, isRunning, streak } = res;
 
-      console.log("streak", streak);
-
       selectTime.value = selectedTime.toString() || "60";
       streakCounter.innerHTML = streak.toString() || "0";
 
