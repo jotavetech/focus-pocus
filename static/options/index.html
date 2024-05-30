@@ -9,53 +9,94 @@
   <body>
     <main id="app">
       <header>
-        <h1>
+        <div class="logo">
           <img src="../assets/img/clock.svg" alt="FocusPocus clock logo" />
-          FocusPocus
-        </h1>
+        </div>
+        <h1>FocusPocus</h1>
       </header>
-      <div id="options">
-        <div class="option">
-          <label class="switch">
-            <input type="checkbox" id="give-up-sound" />
-            <span class="slider round"></span>
-          </label>
-          <p>Give up sound</p>
-        </div>
-        <div class="option">
-          <label class="switch">
-            <input type="checkbox" id="victorious-sound" />
-            <span class="slider round"></span>
-          </label>
-          <p>Victorious sound</p>
-        </div>
-        <div class="option">
-          <label class="switch">
-            <input type="checkbox" id="button-sound" />
-            <span class="slider round"></span>
-          </label>
-          <p>Start/Stop button sound</p>
+      <nav id="tabs">
+        <button class="tab active-tab" id="tab-main">Main</button>
+        <button class="tab" id="tab-blocklist">Blocklist</button>
+        <button class="tab" id="tab-allowlist">Allowlist</button>
+      </nav>
+
+      <!-- MAIN -->
+
+      <div class="page" id="main-page">
+        <div id="options">
+          <p class="title">Alerts</p>
+          <div class="option">
+            <label class="switch">
+              <input type="checkbox" id="give-up-sound" />
+              <span class="slider round"></span>
+            </label>
+            <p>Give Up Sound</p>
+          </div>
+          <div class="option">
+            <label class="switch">
+              <input type="checkbox" id="victorious-sound" />
+              <span class="slider round"></span>
+            </label>
+            <p>Victory Sound</p>
+          </div>
+          <div class="option">
+            <label class="switch">
+              <input type="checkbox" id="victorious-notification" />
+              <span class="slider round"></span>
+            </label>
+            <p>Victory Notification</p>
+          </div>
+          <div class="option">
+            <label class="switch">
+              <input type="checkbox" id="button-sound" />
+              <span class="slider round"></span>
+            </label>
+            <p>Start Button Sound</p>
+          </div>
+          <p class="title">Focus Settings</p>
+          <div class="option">
+            <label class="switch">
+              <input type="checkbox" id="allowlist-mode" />
+              <span class="slider round"></span>
+            </label>
+            <p>Allowlist Mode</p>
+          </div>
         </div>
       </div>
-      <div class="separator"></div>
-      <div id="blocklist">
-        <p>All the websites bellow will be blocked in focus mode.</p>
-        <form id="block-list-form">
+
+      <!-- BLOCKLIST -->
+
+      <div class="page list-page" id="blocklist-page">
+        <p>All the websites bellow will be blocked in blocklist mode.</p>
+        <form id="blocklist-form" class="form">
           <input
             type="text"
             placeholder="Enter a url to block"
-            id="url-input"
+            id="blocklist-input"
           />
-          <button type="submit" id="send-button">
+          <button type="submit" id="blocklist-button">
             <img src="../assets/img/plus.svg" alt="plus icon" />
           </button>
         </form>
-        <ul class="website-list"></ul>
+        <ul class="website-list" id="blocklist-list"></ul>
       </div>
-      <footer>
-        <button id="remove-all-button">Remove all</button>
-        <a href="https://www.pixme.bio/jotavetech">Donate ❤️</a>
-      </footer>
+
+      <!-- ALLOWLIST -->
+
+      <div class="page list-page" id="allowlist-page">
+        <p>Only the websites bellow will be enabled in allowlist mode.</p>
+        <form id="allowlist-form" class="form">
+          <input
+            type="text"
+            placeholder="Enter a url to allow"
+            id="allowlist-input"
+          />
+          <button type="submit" id="allowlist-button">
+            <img src="../assets/img/plus.svg" alt="plus icon" />
+          </button>
+        </form>
+        <ul class="website-list" id="allowlist-list"></ul>
+      </div>
     </main>
     <script src="../options.js"></script>
   </body>

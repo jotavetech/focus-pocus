@@ -1,132 +1,179 @@
+import {
+  blocklistForm,
+  allowlistForm,
+  blocklistButton,
+  blocklistInput,
+  blocklistList,
+  allowlistButton,
+  allowlistInput,
+  allowlistList,
+} from "./elements";
+
+import "./tabs";
+import "./options";
+
 import browser from "webextension-polyfill";
 
-const options = document.querySelectorAll(
-  'input[type="checkbox"]'
-) as NodeListOf<HTMLInputElement>;
+let blocklist: string[] = [];
+let allowlist: string[] = [];
 
-const urlForm = document.querySelector("#block-list-form") as HTMLFormElement;
-const urlInput = document.querySelector("#url-input") as HTMLInputElement;
-const sendButton = document.querySelector("#send-button") as HTMLButtonElement;
-const removeAllButton = document.querySelector(
-  "#remove-all-button"
-) as HTMLButtonElement;
+let isRunning = false;
 
-let timerIsRunning = false;
-let blockList: string[] = [];
+function disableListsWhileRunning() {
+  blocklistButton.disabled = true;
+  allowlistButton.disabled = true;
+  blocklistInput.disabled = true;
+  allowlistInput.disabled = true;
+}
+
+function enableListsWhileNotRunning() {
+  blocklistButton.disabled = false;
+  allowlistButton.disabled = false;
+  blocklistInput.disabled = false;
+  allowlistInput.disabled = false;
+}
 
 browser.storage.local
-  .get(["isRunning", "options", "blockList"])
+  .get(["blocklist", "allowlist", "isRunning", "options"])
   .then((data) => {
     if (data.isRunning) {
-      urlInput.disabled = true;
-      sendButton.disabled = true;
-      timerIsRunning = true;
+      isRunning = true;
+      disableListsWhileRunning();
     }
 
-    if (data.options) {
-      options.forEach((option) => {
-        option.checked = data.options[option.id];
+    if (data.blocklist) {
+      blocklist = data.blocklist;
+      blocklist.forEach((url) => {
+        addUrlListElement(url, blocklistList, "blocklist");
       });
     }
 
-    if (data.blockList) {
-      blockList = data.blockList;
-      blockList.forEach((url) => {
-        addUrlListElement(url);
+    if (data.allowlist) {
+      allowlist = data.allowlist;
+      allowlist.forEach((url) => {
+        addUrlListElement(url, allowlistList, "allowlist");
       });
     }
   });
 
 browser.storage.onChanged.addListener((changes) => {
   if (changes.isRunning && changes.isRunning.newValue) {
-    urlInput.disabled = true;
-    sendButton.disabled = true;
-    timerIsRunning = true;
+    isRunning = true;
+    disableListsWhileRunning();
   }
 
   if (changes.isRunning && !changes.isRunning.newValue) {
-    urlInput.disabled = false;
-    sendButton.disabled = false;
-    timerIsRunning = false;
+    isRunning = false;
+    enableListsWhileNotRunning();
   }
 });
 
-options.forEach((option) => {
-  option.addEventListener("change", () => {
-    browser.storage.local.get("options").then((data) => {
-      let options = data.options || {};
-      options[option.id] = option.checked;
-      browser.storage.local.set({ options });
-    });
-  });
-});
-
-urlForm.addEventListener("submit", (e) => {
+blocklistForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (timerIsRunning)
+  if (isRunning) {
     return alert("You can't add a website while the focus mode is running.");
-  if (!urlInput.value) return alert("Please enter a URL.");
+  }
+  if (!blocklistInput.value) {
+    return alert("Please enter a URL.");
+  }
 
-  blockList.push(urlInput.value);
-  browser.storage.local.set({ blockList });
-  addUrlListElement(urlInput.value);
-  urlInput.value = "";
+  blocklist.push(blocklistInput.value);
+
+  browser.storage.local.set({ blocklist });
+
+  addUrlListElement(blocklistInput.value, blocklistList, "blocklist");
+
+  blocklistInput.value = "";
 });
 
-function createUrlListElement(url: string) {
-  let li = document.createElement("li");
+allowlistForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (isRunning) {
+    return alert("You can't add a website while the focus mode is running.");
+  }
+  if (!allowlistInput.value) {
+    return alert("Please enter a URL.");
+  }
+
+  allowlist.push(allowlistInput.value);
+
+  browser.storage.local.set({ allowlist });
+
+  addUrlListElement(allowlistInput.value, allowlistList, "allowlist");
+
+  allowlistInput.value = "";
+});
+
+function createUrlListElement(url: string, type: "blocklist" | "allowlist") {
+  const li = document.createElement("li");
 
   li.innerHTML = `
     <span>${url}</span>
-    <button class="remove-button">
-      <img src="../assets/img/trash-2.svg" alt="trash icon" />
+    <button class="remove-button-${type}">
+      <img src="../assets/img/remove.svg" alt="remove icon" />
     </button>
   `;
 
   return li;
 }
 
-function addUrlListElement(url: string) {
-  let ul = document.querySelector(".website-list") as HTMLUListElement;
-  ul.appendChild(createUrlListElement(url));
+function addUrlListElement(
+  url: string,
+  list: HTMLUListElement,
+  type: "blocklist" | "allowlist"
+) {
+  const li = createUrlListElement(url, type);
+  list.appendChild(li);
 }
 
-function removeUrlListElement(url: string) {
-  if (timerIsRunning)
-    return alert("You can't remove a website while the focus mode is running.");
+document.addEventListener("click", (e) => {
+  const target = e.target as HTMLElement;
 
-  blockList = blockList.filter((u) => u !== url);
-  browser.storage.local.set({ blockList });
-
-  let ul = document.querySelector(".website-list") as HTMLUListElement;
-  ul.innerHTML = "";
-
-  blockList.forEach((url) => {
-    addUrlListElement(url);
-  });
-}
-
-document.addEventListener("click", (event) => {
-  const target = event.target as HTMLElement;
   if (
-    target.classList.contains("remove-button") ||
-    target.parentElement?.classList.contains("remove-button")
+    target.classList.contains("remove-button-blocklist") ||
+    target.parentElement?.classList.contains("remove-button-blocklist")
   ) {
     let url =
       target.parentElement?.parentElement?.querySelector("span")?.textContent;
     if (url) {
-      removeUrlListElement(url);
+      removeBlocklistElement(url);
+    }
+  }
+
+  if (
+    target.classList.contains("remove-button-allowlist") ||
+    target.parentElement?.classList.contains("remove-button-allowlist")
+  ) {
+    let url =
+      target.parentElement?.parentElement?.querySelector("span")?.textContent;
+    if (url) {
+      removeAllowlistElement(url);
     }
   }
 });
 
-removeAllButton.addEventListener("click", () => {
-  if (timerIsRunning)
+function removeBlocklistElement(url: string) {
+  if (isRunning)
     return alert("You can't remove a website while the focus mode is running.");
+  blocklist = blocklist.filter((u) => u !== url);
+  browser.storage.local.set({ blocklist });
 
-  blockList = [];
-  browser.storage.local.set({ blockList });
+  blocklistList.innerHTML = "";
 
-  let ul = document.querySelector(".website-list") as HTMLUListElement;
-  ul.innerHTML = "";
-});
+  blocklist.forEach((url) => {
+    addUrlListElement(url, blocklistList, "blocklist");
+  });
+}
+
+function removeAllowlistElement(url: string) {
+  if (isRunning)
+    return alert("You can't remove a website while the focus mode is running.");
+  allowlist = allowlist.filter((u) => u !== url);
+  browser.storage.local.set({ allowlist });
+
+  allowlistList.innerHTML = "";
+
+  allowlist.forEach((url) => {
+    addUrlListElement(url, allowlistList, "allowlist");
+  });
+}
