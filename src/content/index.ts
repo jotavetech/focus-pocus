@@ -7,6 +7,8 @@ let allowlistMode = false;
 
 let tabStates: Map<string, boolean> = new Map();
 
+console.log("aqui");
+
 browser.storage.local
   .get(["blocklist", "allowlist", "isRunning", "options"])
   .then((res) => {
@@ -14,6 +16,7 @@ browser.storage.local
     allowlist = res.allowlist;
 
     if (res.options["allowlist-mode"]) {
+      console.log("ta tendo ein");
       allowlistMode = true;
     }
 

@@ -118,6 +118,10 @@ header .logo img {
   color: var(--text);
 }
 
+#main-page #focus-settings .title {
+  margin-bottom: 10px;
+}
+
 #main-page #options .title {
   margin-top: 5px;
   font-size: 20px;

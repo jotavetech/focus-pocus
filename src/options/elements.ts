@@ -5,6 +5,10 @@ const options = document.querySelectorAll(
   'input[type="checkbox"]'
 ) as NodeListOf<HTMLInputElement>;
 
+const focusSettings = document.querySelector(
+  "#focus-settings"
+) as HTMLDivElement;
+
 const blocklistForm = document.querySelector(
   "#blocklist-form"
 ) as HTMLFormElement;
@@ -43,4 +47,5 @@ export {
   allowlistButton,
   allowlistInput,
   allowlistList,
+  focusSettings,
 };
