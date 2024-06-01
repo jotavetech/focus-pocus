@@ -7,6 +7,7 @@ import {
   allowlistButton,
   allowlistInput,
   allowlistList,
+  streakCounter,
 } from "./elements";
 
 import "./tabs";
@@ -34,7 +35,7 @@ function enableListsWhileNotRunning() {
 }
 
 browser.storage.local
-  .get(["blocklist", "allowlist", "isRunning", "options"])
+  .get(["blocklist", "allowlist", "isRunning", "options", "streak"])
   .then((data) => {
     if (data.isRunning) {
       isRunning = true;
@@ -54,6 +55,10 @@ browser.storage.local
         addUrlListElement(url, allowlistList, "allowlist");
       });
     }
+
+    if (data.streak) {
+      streakCounter.textContent = data.streak.toString();
+    }
   });
 
 browser.storage.onChanged.addListener((changes) => {
@@ -65,6 +70,10 @@ browser.storage.onChanged.addListener((changes) => {
   if (changes.isRunning && !changes.isRunning.newValue) {
     isRunning = false;
     enableListsWhileNotRunning();
+  }
+
+  if (changes.streak && changes.streak.newValue) {
+    streakCounter.textContent = changes.streak.newValue.toString();
   }
 });
 

@@ -35,6 +35,10 @@ let allowlistList = document.querySelector(
   "#allowlist-list"
 ) as HTMLUListElement;
 
+const streakCounter = document.querySelector(
+  "#streak-status"
+) as HTMLSpanElement;
+
 export {
   options,
   tabs,
@@ -48,4 +52,5 @@ export {
   allowlistInput,
   allowlistList,
   focusSettings,
+  streakCounter,
 };

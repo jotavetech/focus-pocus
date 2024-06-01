@@ -48,6 +48,7 @@ header {
   align-items: center;
   background: var(--header-bg);
   padding: 0 16px;
+  justify-content: space-between;
 }
 
 header h1 {
@@ -59,6 +60,14 @@ header h1 {
 }
 
 header .logo {
+  font-kerning: 20px;
+  font-weight: 400;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+}
+
+header .logo .logo-bg {
   width: 35px;
   height: 35px;
   padding: 2px;
@@ -72,6 +81,20 @@ header .logo {
 header .logo img {
   width: 25px;
   height: 25px;
+}
+
+header .header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .stats-button {
+  cursor: pointer;
+}
+
+header #streak-status {
+  font-size: 16px;
 }
 
 #tabs {
