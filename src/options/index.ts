@@ -67,27 +67,17 @@ urlForm.addEventListener("submit", (e) => {
     return alert("You can't add a website while the focus mode is running.");
   if (!urlInput.value) return alert("Please enter a URL.");
 
-  if (!isValidURL(urlInput.value)) return alert("Please enter a valid URL.") // verify URL
-
   if (checkUrlListElements(urlInput.value)) {
-      // if url exists in website-list div, return alert
-      return alert("This URL already exists")
-  } else {
-    // if url doesnt exist in website-list div, add new element to
-    blockList.push(urlInput.value);
-    browser.storage.local.set({ blockList });
-    addUrlListElement(urlInput.value);
+    
+    return alert("This URL already exists");
   }
+  
+  blockList.push(urlInput.value);
+  browser.storage.local.set({ blockList });
+  addUrlListElement(urlInput.value);
 
   urlInput.value = "";
 });
-
-
-function isValidURL(url: string) {
-  const regex = /^(https?|ftp):\/\/[^\s\/$.?#].[^\s]*$/
-
-  return regex.test(url)
-}
 
 function createUrlListElement(url: string) {
   let li = document.createElement("li");
@@ -103,23 +93,12 @@ function createUrlListElement(url: string) {
 }
 
 function checkUrlListElements(url: string) {
-
-  const list = document.querySelector(" .website-list") as HTMLUListElement;
-
-  const childs = list.childNodes
-
-  for (let index = 0; index < childs.length; index++) {
-    const element = childs[index];
-
-    if (element.firstChild?.nextSibling?.textContent === url) {
-      return true // return true if is repeated element
-    }
-  }
+  return blockList.includes(url);
 }
 
 function addUrlListElement(url: string) {
   let ul = document.querySelector(".website-list") as HTMLUListElement;
-  ul.appendChild(createUrlListElement(url))
+  ul.appendChild(createUrlListElement(url));
 }
 
 function removeUrlListElement(url: string) {
