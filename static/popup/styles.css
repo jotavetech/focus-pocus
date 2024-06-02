@@ -72,10 +72,19 @@ header nav button img {
   height: 22px;
 }
 
+header nav button:hover {
+  opacity: 0.8;
+}
+
 header .streak {
   display: flex;
   justify-content: center;
   align-items: end;
+}
+
+header .streak:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 header .streak #streak-counter {
