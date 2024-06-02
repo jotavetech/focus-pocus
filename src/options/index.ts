@@ -13,7 +13,6 @@ import {
 import "./tabs";
 import "./options";
 import "./streak";
-import "./tooltips";
 
 import browser from "webextension-polyfill";
 

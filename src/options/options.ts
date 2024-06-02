@@ -38,4 +38,10 @@ browser.storage.onChanged.addListener((changes) => {
   if (changes.isRunning && !changes.isRunning.newValue) {
     hiddenFocusSettings(false);
   }
+
+  if (changes.options && changes.options.newValue) {
+    options.forEach((option) => {
+      option.checked = changes.options.newValue[option.id];
+    });
+  }
 });

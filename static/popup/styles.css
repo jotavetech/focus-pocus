@@ -13,7 +13,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: background 0.5s;
+  transition: all 0.5s;
 }
 
 button {
@@ -93,14 +93,14 @@ main {
   padding: 20px;
 }
 
-#select-time {
+select {
   width: 250px;
   height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: var(--action-bg);
-  border-radius: 10px;
+  border-radius: 15px;
   outline: none;
   border: none;
   padding: 0 10px;
@@ -109,9 +109,30 @@ main {
   color: var(--action-text);
 }
 
-#select-time option {
+select option {
   background: var(--action-bg);
   color: var(--action-text);
+}
+
+#focus-mode {
+  width: 250px;
+  height: 32px;
+  padding: 0 10px;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--text);
+  border-radius: 15px;
+  font-size: 14px;
+}
+
+#focus-mode:hover {
+  cursor: pointer;
+  background: var(--text);
+  color: var(--bg);
+}
+
+#focus-mode:active {
+  transform: scale(0.95);
 }
 
 .app {

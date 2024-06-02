@@ -1,17 +1,22 @@
 import browser from "webextension-polyfill";
+
 import {
   changeSelectedTime,
   handleStartTimer,
 } from "../background/services/timer";
+
 import changePopupColor from "../utils/change-popup-color";
 import playSound from "../utils/play-popup-sounds";
 
-const configButton = document.querySelector("#config") as HTMLElement;
-const selectTime = document.querySelector("#select-time") as HTMLSelectElement;
-const timerDisplay = document.querySelector("#timer-counter") as HTMLElement;
-const startButton = document.querySelector("#start") as HTMLElement;
-const streakCounter = document.querySelector("#streak-counter") as HTMLElement;
-const customInput = document.querySelector("#custom-input") as HTMLInputElement;
+import {
+  configButton,
+  selectTime,
+  timerDisplay,
+  startButton,
+  streakCounter,
+  customInput,
+  focusMode,
+} from "./elements";
 
 let isTimerRunning = false;
 
@@ -20,12 +25,24 @@ function changeAppStyleMode(isRunning: boolean) {
   startButton.innerHTML = isRunning ? "GIVE UP!" : "START FOCUSING";
   timerDisplay.style.pointerEvents = isRunning ? "none" : "auto";
   selectTime.disabled = isRunning;
+  focusMode.disabled = isRunning;
   customInput.disabled = isRunning;
+}
+
+function updateFocusModeButton(isAllowlistMode: boolean) {
+  focusMode.textContent = isAllowlistMode ? "Allowlist Mode" : "Blocklist Mode";
 }
 
 function updateTimer() {
   browser.storage.local
-    .get(["timer", "selectedTime", "timeLabel", "isRunning", "streak"])
+    .get([
+      "timer",
+      "selectedTime",
+      "timeLabel",
+      "isRunning",
+      "streak",
+      "options",
+    ])
     .then((res) => {
       const { timer, selectedTime, timeLabel, isRunning, streak } = res;
 
@@ -49,6 +66,9 @@ function updateTimer() {
         timerDisplay.innerHTML = formatTime(totalSecondsLeft);
       }
       isTimerRunning = isRunning;
+
+      updateFocusModeButton(res.options["allowlist-mode"]);
+
       changeAppStyleMode(isRunning);
     });
 }
@@ -173,6 +193,7 @@ function handleTimerEnd() {
   isTimerRunning = false;
   startButton.textContent = "START FOCUSING";
   selectTime.disabled = false;
+  focusMode.disabled = false;
   customInput.disabled = false;
   customInput.style.display = "none";
   timerDisplay.style.display = "block";
@@ -191,6 +212,22 @@ browser.storage.onChanged.addListener((changes) => {
 startButton.addEventListener("click", handleStartTimerButton);
 selectTime.addEventListener("change", handleTimerSelect);
 configButton.addEventListener("click", () => browser.runtime.openOptionsPage());
+
+focusMode.addEventListener("click", () => {
+  browser.storage.local.get("options").then((res) => {
+    if (res.options && res.options["allowlist-mode"]) {
+      browser.storage.local.set({
+        options: { ...res.options, "allowlist-mode": false },
+      });
+      updateFocusModeButton(false);
+    } else {
+      browser.storage.local.set({
+        options: { ...res.options, "allowlist-mode": true },
+      });
+      updateFocusModeButton(true);
+    }
+  });
+});
 
 timerDisplay.addEventListener("click", () => {
   if (!isTimerRunning) {

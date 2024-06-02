@@ -19,6 +19,8 @@ function initialize() {
       if (res.isRunning) {
         checkFocusPage();
       }
+
+      console.log(blocklist, allowlist, allowlistMode);
     });
 }
 
