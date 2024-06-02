@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/eslint-parser": "^7.24.5",
+    "@types/toastify-js": "^1.12.3",
     "@types/webextension-polyfill": "^0.10.7",
     "copy-webpack-plugin": "^12.0.2",
     "cross-env": "^7.0.3",
@@ -23,5 +24,9 @@
     "webextension-polyfill": "^0.11.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "tippy.js": "^6.3.7",
+    "toastify-js": "^1.12.0"
   }
 }

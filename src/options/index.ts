@@ -12,6 +12,8 @@ import {
 
 import "./tabs";
 import "./options";
+import "./streak";
+import "./tooltips";
 
 import browser from "webextension-polyfill";
 
@@ -74,6 +76,10 @@ browser.storage.onChanged.addListener((changes) => {
 
   if (changes.streak && changes.streak.newValue) {
     streakCounter.textContent = changes.streak.newValue.toString();
+  }
+
+  if (changes.streak && changes.streak.newValue === 0) {
+    streakCounter.textContent = "0";
   }
 });
 

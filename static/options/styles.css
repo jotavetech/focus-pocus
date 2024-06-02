@@ -87,14 +87,40 @@ header .header-buttons {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
 }
 
-header .stats-button {
+header .stats-button:hover {
+  opacity: 0.8;
   cursor: pointer;
 }
 
 header #streak-status {
   font-size: 16px;
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  text-wrap: nowrap;
+  top: 40px;
+  right: 0;
+  background: var(--app-bg);
+  color: var(--text);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  width: 150px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+header #streak-button:hover .tooltip {
+  display: block;
+}
+
+header #pix-me-button:hover .tooltip {
+  display: block;
 }
 
 #tabs {

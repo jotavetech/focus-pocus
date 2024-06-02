@@ -39,6 +39,10 @@ const streakCounter = document.querySelector(
   "#streak-status"
 ) as HTMLSpanElement;
 
+const streakButton = document.querySelector("#streak-button") as HTMLDivElement;
+
+const streakTooltip = document.querySelector(".streak-tt") as HTMLDivElement;
+
 export {
   options,
   tabs,
@@ -53,4 +57,6 @@ export {
   allowlistList,
   focusSettings,
   streakCounter,
+  streakButton,
+  streakTooltip,
 };

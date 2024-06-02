@@ -12,7 +12,7 @@
     "128": "assets/logo/icon-128.png"
   },
 
-  "permissions": ["storage", "notifications", "tabs"],
+  "permissions": ["storage", "notifications"],
 
   "browser_action": {
     "default_icon": {
