@@ -67,9 +67,15 @@ urlForm.addEventListener("submit", (e) => {
     return alert("You can't add a website while the focus mode is running.");
   if (!urlInput.value) return alert("Please enter a URL.");
 
+  if (checkUrlListElements(urlInput.value)) {
+    
+    return alert("This URL already exists");
+  }
+  
   blockList.push(urlInput.value);
   browser.storage.local.set({ blockList });
   addUrlListElement(urlInput.value);
+
   urlInput.value = "";
 });
 
@@ -84,6 +90,10 @@ function createUrlListElement(url: string) {
   `;
 
   return li;
+}
+
+function checkUrlListElements(url: string) {
+  return blockList.includes(url);
 }
 
 function addUrlListElement(url: string) {
