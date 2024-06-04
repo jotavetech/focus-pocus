@@ -102,6 +102,12 @@ main {
   padding: 20px;
 }
 
+#do-not-giveup-message {
+  color: var(--text);
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
 select {
   width: 250px;
   height: 32px;

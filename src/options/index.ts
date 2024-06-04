@@ -15,6 +15,7 @@ import "./options";
 import "./streak";
 
 import browser from "webextension-polyfill";
+import toast from "../utils/toast";
 
 let blocklist: string[] = [];
 let allowlist: string[] = [];
@@ -85,10 +86,13 @@ browser.storage.onChanged.addListener((changes) => {
 blocklistForm.addEventListener("submit", (e) => {
   e.preventDefault();
   if (isRunning) {
-    return alert("You can't add a website while the focus mode is running.");
+    return toast(
+      "You can't add a website while the focus mode is running.",
+      true
+    );
   }
   if (!blocklistInput.value) {
-    return alert("Please enter a URL.");
+    return toast("Please, enter a URL.", true);
   }
 
   blocklist.push(blocklistInput.value);
@@ -103,10 +107,13 @@ blocklistForm.addEventListener("submit", (e) => {
 allowlistForm.addEventListener("submit", (e) => {
   e.preventDefault();
   if (isRunning) {
-    return alert("You can't add a website while the focus mode is running.");
+    return toast(
+      "You can't add a website while the focus mode is running.",
+      true
+    );
   }
   if (!allowlistInput.value) {
-    return alert("Please enter a URL.");
+    return toast("Please enter a URL.", true);
   }
 
   allowlist.push(allowlistInput.value);
@@ -168,7 +175,10 @@ document.addEventListener("click", (e) => {
 
 function removeBlocklistElement(url: string) {
   if (isRunning)
-    return alert("You can't remove a website while the focus mode is running.");
+    return toast(
+      "You can't remove a website while the focus mode is running.",
+      true
+    );
   blocklist = blocklist.filter((u) => u !== url);
   browser.storage.local.set({ blocklist });
 
@@ -181,7 +191,10 @@ function removeBlocklistElement(url: string) {
 
 function removeAllowlistElement(url: string) {
   if (isRunning)
-    return alert("You can't remove a website while the focus mode is running.");
+    return toast(
+      "You can't remove a website while the focus mode is running.",
+      true
+    );
   allowlist = allowlist.filter((u) => u !== url);
   browser.storage.local.set({ allowlist });
 

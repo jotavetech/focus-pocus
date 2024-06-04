@@ -1,6 +1,6 @@
 import toastify from "toastify-js";
 
-function toast(text: string) {
+function toast(text: string, error: boolean = false) {
   toastify({
     text,
     duration: 2000,
@@ -10,7 +10,7 @@ function toast(text: string) {
       position: "absolute",
       top: "10px",
       right: "10px",
-      background: "#0b0b0b",
+      background: error ? "#9f0017" : "#0b0b0b",
       padding: "10px",
       borderRadius: "5px",
       fontSize: "16px",

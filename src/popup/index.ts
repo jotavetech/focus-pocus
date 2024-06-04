@@ -6,6 +6,7 @@ import {
   handleStartTimer,
 } from "../background/services/timer";
 
+import getDoNotGiveUpMessage from "../utils/do-not-giveup";
 import changePopupColor from "../utils/change-popup-color";
 import playSound from "../utils/play-popup-sounds";
 
@@ -17,6 +18,7 @@ import {
   streakCounter,
   customInput,
   focusMode,
+  doNotGiveUpMessage,
 } from "./elements";
 
 let isTimerRunning = false;
@@ -25,6 +27,7 @@ function changeAppStyleMode(isRunning: boolean) {
   changePopupColor(isRunning);
   startButton.innerHTML = isRunning ? "GIVE UP!" : "START FOCUSING";
   timerDisplay.style.pointerEvents = isRunning ? "none" : "auto";
+  doNotGiveUpMessage.style.display = isRunning ? "block" : "none";
   selectTime.disabled = isRunning;
   focusMode.disabled = isRunning;
   customInput.disabled = isRunning;
@@ -32,6 +35,10 @@ function changeAppStyleMode(isRunning: boolean) {
 
 function updateFocusModeButton(isAllowlistMode: boolean) {
   focusMode.textContent = isAllowlistMode ? "Allowlist Mode" : "Blocklist Mode";
+}
+
+function getRandomDoNotGiveUpMessage() {
+  doNotGiveUpMessage.textContent = getDoNotGiveUpMessage();
 }
 
 function updateTimer() {
@@ -250,6 +257,7 @@ startButton.addEventListener("click", () => {
   isTimerRunning = !isTimerRunning;
   startButton.textContent = isTimerRunning ? "GIVE UP!" : "START FOCUSING";
   timerDisplay.style.pointerEvents = isTimerRunning ? "none" : "auto";
+  getRandomDoNotGiveUpMessage();
 });
 
 updateTimer();

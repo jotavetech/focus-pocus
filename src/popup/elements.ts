@@ -6,6 +6,9 @@ const streakCounter = document.querySelector("#streak-counter") as HTMLElement;
 const streakButton = document.querySelector("#streak-button") as HTMLDivElement;
 const customInput = document.querySelector("#custom-input") as HTMLInputElement;
 const focusMode = document.querySelector("#focus-mode") as HTMLButtonElement;
+const doNotGiveUpMessage = document.querySelector(
+  "#do-not-giveup-message"
+) as HTMLElement;
 
 export {
   configButton,
@@ -16,4 +19,5 @@ export {
   customInput,
   focusMode,
   streakButton,
+  doNotGiveUpMessage,
 };
