@@ -18,9 +18,10 @@ browser.storage.local
   .get(["isRunning", "options", "blockList"])
   .then((data) => {
     if (data.isRunning) {
-      urlInput.disabled = true;
-      sendButton.disabled = true;
+      // urlInput.disabled = true;
+      // sendButton.disabled = true;
       timerIsRunning = true;
+      document.body.dataset.isrunning = "true"
     }
 
     if (data.options) {
@@ -39,15 +40,17 @@ browser.storage.local
 
 browser.storage.onChanged.addListener((changes) => {
   if (changes.isRunning && changes.isRunning.newValue) {
-    urlInput.disabled = true;
-    sendButton.disabled = true;
+    // urlInput.disabled = true;
+    // sendButton.disabled = true;
     timerIsRunning = true;
+    document.body.dataset.isrunning = "true"
   }
 
   if (changes.isRunning && !changes.isRunning.newValue) {
     urlInput.disabled = false;
     sendButton.disabled = false;
     timerIsRunning = false;
+    document.body.dataset.isrunning = "false"
   }
 });
 
@@ -63,8 +66,8 @@ options.forEach((option) => {
 
 urlForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (timerIsRunning)
-    return alert("You can't add a website while the focus mode is running.");
+  // if (timerIsRunning)
+  //   return alert("You can't add a website while the focus mode is running.");
   if (!urlInput.value) return alert("Please enter a URL.");
 
   if (checkUrlListElements(urlInput.value)) {
