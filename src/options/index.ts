@@ -22,6 +22,14 @@ let allowlist: string[] = [];
 
 let isRunning = false;
 
+function checkIfUrlExists(url: string, type: "blocklist" | "allowlist") {
+  if (type === "blocklist") {
+    return blocklist.includes(url);
+  } else {
+    return allowlist.includes(url);
+  }
+}
+
 function disableListsWhileRunning() {
   blocklistButton.disabled = true;
   allowlistButton.disabled = true;
@@ -85,15 +93,16 @@ browser.storage.onChanged.addListener((changes) => {
 
 blocklistForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (isRunning) {
+  if (isRunning)
     return toast(
       "You can't add a website while the focus mode is running.",
       true
     );
-  }
-  if (!blocklistInput.value) {
-    return toast("Please, enter a URL.", true);
-  }
+
+  if (!blocklistInput.value) return toast("Please, enter a URL.", true);
+
+  if (checkIfUrlExists(blocklistInput.value, "blocklist"))
+    return toast("This URL already exists in the blocklist.", true);
 
   blocklist.push(blocklistInput.value);
 
@@ -106,15 +115,16 @@ blocklistForm.addEventListener("submit", (e) => {
 
 allowlistForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (isRunning) {
+  if (isRunning)
     return toast(
       "You can't add a website while the focus mode is running.",
       true
     );
-  }
-  if (!allowlistInput.value) {
-    return toast("Please enter a URL.", true);
-  }
+
+  if (!allowlistInput.value) return toast("Please enter a URL.", true);
+
+  if (checkIfUrlExists(allowlistInput.value, "allowlist"))
+    return toast("This URL already exists in the allowlist.", true);
 
   allowlist.push(allowlistInput.value);
 
