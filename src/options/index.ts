@@ -70,6 +70,7 @@ urlForm.addEventListener("submit", (e) => {
   blockList.push(urlInput.value);
   browser.storage.local.set({ blockList });
   addUrlListElement(urlInput.value);
+
   urlInput.value = "";
 });
 
