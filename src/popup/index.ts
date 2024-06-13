@@ -52,7 +52,14 @@ function updateTimer() {
       "options",
     ])
     .then((res) => {
-      const { timer, selectedTime, timeLabel, isRunning, streak } = res;
+      const {
+        timer,
+        selectedTime,
+        timeLabel,
+        isRunning,
+        streak,
+        options: settings,
+      } = res;
 
       selectTime.value = selectedTime.toString() || "60";
       streakCounter.innerHTML = streak.toString() || "0";
@@ -75,7 +82,7 @@ function updateTimer() {
       }
       isTimerRunning = isRunning;
 
-      updateFocusModeButton(res.options["allowlist-mode"]);
+      if (settings) updateFocusModeButton(settings["allowlist-mode"]);
 
       changeAppStyleMode(isRunning);
     });
