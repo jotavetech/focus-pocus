@@ -6,7 +6,7 @@
   "author": "@jotavetech",
 
   "icons": {
-    "16": "assets/logo/icon-32.png",
+    "16": "assets/logo/icon-16.png",
     "32": "assets/logo/icon-32.png",
     "64": "assets/logo/icon-64.png",
     "128": "assets/logo/icon-128.png"
