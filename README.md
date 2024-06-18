@@ -31,7 +31,7 @@ The last published version:
 ### Todo
 
 - [x] Add custom timer settings.
-- [ ] Add allowed list mode.
+- [x] Add allowed list mode.
 - [ ] Add groups for the blocked websites list.
 - [ ] Add a verification prompt before giving up.
 - [x] Add support for other browsers.
